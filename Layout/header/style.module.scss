@@ -1,0 +1,25 @@
+@import "../../styles/pallete.module.scss";
+
+.line {
+  height: 1.5px;
+}
+
+.item_hover:hover .line {
+  background-color: $yellow100;
+  animation-name: anim;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes anim {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.active_menu {
+  background-color: $yellow100;
+  height: 1.5px;
+}
