@@ -17,6 +17,12 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "palette/typography.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "palette/typography.js",
+    "themes/compStyleOverride.js"
+  ],
   "exclude": ["node_modules"]
 }

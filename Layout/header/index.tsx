@@ -35,21 +35,27 @@ const Header: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid
       container
-      p={2}
+      py={2}
+      sx={{
+        px: { xs: 2, md: 4 },
+      }}
       justifyContent={"space-between"}
       alignItems={"center"}
     >
-      <Grid container justifyContent={"space-between"} md={5} sm={9} item>
+      <Grid container md={5} sm={9} item>
         {Items.map((v: Menu, i: number) => {
-          console.log(v.id);
           return (
-            <Grid className={style.item_hover}>
+            <Grid
+              p={2}
+              ml={2}
+              className={style.item_hover}
+              sx={{ cursor: "pointer" }}
+            >
               <Typography
                 className={`${
                   props.active == v.id && "text_active_main"
                 } text_transition_main `}
-                sx={{ cursor: "pointer" }}
-                variant="h6"
+                variant="h5"
                 key={i}
               >
                 {v.title}

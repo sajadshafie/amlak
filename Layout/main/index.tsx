@@ -13,7 +13,14 @@ const Main: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid>
       <Header active={props.active} />
-      {props.children}
+      <Grid
+        sx={{
+          px: { xs: 2, md: 4 },
+        }}
+        my={2}
+      >
+        {props.children}
+      </Grid>
       <Footer />
     </Grid>
   );
