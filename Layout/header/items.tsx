@@ -4,10 +4,6 @@ const Items = [
     id: 1,
   },
   {
-    title: "درباره ما",
-    id: 2,
-  },
-  {
     title: "خرید ",
     id: 3,
     Items: [
@@ -29,6 +25,11 @@ const Items = [
       },
     ],
   },
+  {
+    title: "درباره ما",
+    id: 2,
+  },
+
   {
     title: "درخواست مشاوره",
     id: 4,

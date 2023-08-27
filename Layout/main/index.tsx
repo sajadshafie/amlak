@@ -16,6 +16,7 @@ const Main: React.FC<Partial<Props>> = (props) => {
       <Grid
         sx={{
           px: { xs: 2, md: 4 },
+          width: "100%",
         }}
         my={2}
       >

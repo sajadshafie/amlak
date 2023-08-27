@@ -42,7 +42,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
       justifyContent={"space-between"}
       alignItems={"center"}
     >
-      <Grid container md={5} sm={9} item>
+      <Grid container md={7} sm={7} item>
         {Items.map((v: Menu, i: number) => {
           return (
             <Grid
@@ -65,12 +65,12 @@ const Header: React.FC<Partial<Props>> = (props) => {
                 className={`${
                   props.active == v.id ? style.active_menu : style.line
                 }`}
-              ></Typography>
+              />
             </Grid>
           );
         })}
       </Grid>
-      <Grid md={5} sm={1} justifyContent={"flex-end"} container item>
+      <Grid md={5} sm={5} justifyContent={"flex-end"} container item>
         <Grid sx={{ display: "flex", alignItems: "center" }}>
           <Appinput variant="outlined" sx={{ width: "200px" }} label="جستجو" />
           <Grid
@@ -78,13 +78,15 @@ const Header: React.FC<Partial<Props>> = (props) => {
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
-              mx: 2,
+              mx: 4,
             }}
             onClick={handleClick}
             aria-describedby={id}
           >
             <PersonIcon sx={{ fontSize: "25px" }} />
-            <Typography variant="caption">پروفایل</Typography>
+            <Typography variant="caption" className="text_transition_sub">
+              پروفایل
+            </Typography>
           </Grid>
           <Appbutton variant="contained">ثبت اگهی</Appbutton>
         </Grid>
