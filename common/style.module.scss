@@ -1,0 +1,11 @@
+@import "../styles/pallete.module.scss";
+
+.link {
+  text-decoration: none;
+  font-size: 12px;
+  transition: 0.1s;
+  color: $yellow100;
+}
+.link:hover {
+  color: $yellow200;
+}

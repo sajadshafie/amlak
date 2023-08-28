@@ -26,3 +26,9 @@ body {
   transition: 0.1s;
   color: #212121;
 }
+.slick-list {
+  margin: 0 -5px;
+}
+.slick-slide > div {
+  padding: 0 5px;
+}

@@ -3,7 +3,9 @@ import Main from "@/Layout/main";
 import Iconbox from "@/components/Iconbox";
 import Carousel from "@/libs/Carousel";
 import AdverImage from "@/components/AdverImage";
-import { Grid } from "@mui/material";
+import { Grid, Typography, useTheme } from "@mui/material";
+import Appimage from "@/common/Appimage";
+import ImageHover from "@/components/main/imageHover";
 
 type iconBox = {
   title: string;
@@ -12,38 +14,51 @@ type iconBox = {
 };
 
 const Home = (): JSX.Element => {
-  const items: React.ReactNode[] = [
-    <AdverImage
-      ImageSrc="/images/city.jpeg"
-      title="فروش بهترین و لوکس ترین اپارتمان ها"
-      sub_title="طرف قرارداد با معتبرترین املاک کشور"
+  const theme = useTheme();
+
+  const Items: React.ReactNode[] = [
+    <ImageHover
+      image="/images/city/tehran.jpeg"
+      label="تهران"
+      description="بهترین نقاط شهر"
     />,
-    <AdverImage
-      ImageSrc="/images/city2.jpeg"
-      title="پیش خرید ‍,رهن  ,اجاره ملک با تضمین"
-      sub_title="دارای استعلام از تمام املاک موجود"
+    <ImageHover
+      image="/images/city/mashhad.webp"
+      label="مشهد"
+      description="بهترین زمین ها در اطراف شهر"
     />,
-    <AdverImage
-      ImageSrc="/images/farm.jpeg"
-      title="خرید فروش انواع زمین های کشاورزی و زراعی"
-      sub_title="فروش زمین کشاورزی در بهترین نقاط کشور"
+    <ImageHover
+      image="/images/city/yazd.webp"
+      label="یزد"
+      description=" زمین های بزرگ برای ساخت ساز"
     />,
-    <AdverImage
-      ImageSrc="/images/farm2.jpeg"
-      title="فروش زمین های با مجوز ساخت و ساز"
-      sub_title="همکاری در ساخت و مشاوره رایگان"
+    <ImageHover
+      image="/images/city/tabriz.jpeg"
+      label="تبریز"
+      description="املاک تجاری"
     />,
-    <AdverImage
-      ImageSrc="/images/vila.jpeg"
-      title="فروش انواع ویلا و خانه ویلایی"
-      sub_title="وجود خانه هایی با انواع متراژ"
+    <ImageHover
+      image="/images/city/mashhad.webp"
+      label="مشهد"
+      description="بهترین زمین ها در اطراف شهر"
+    />,
+    <ImageHover
+      image="/images/city2.jpeg"
+      label="تهران"
+      description="بهترین نقاط شهر"
+    />,
+    <ImageHover
+      image="/images/city/tehran.jpeg"
+      label="تهران"
+      description="بهترین نقاط شهر"
     />,
   ];
+
   const iconbox_items: iconBox[] = [
     {
       title: "خرید فروش انلاین ملک",
       description:
-        "و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام ",
+        "ی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام ",
       icon: "/images/support.png",
     },
     {
@@ -59,22 +74,55 @@ const Home = (): JSX.Element => {
       icon: "/images/support.png",
     },
   ];
+
   return (
     <>
       <Main active={1}>
-        <Carousel data={items} />
-        <Grid mt={10} container justifyContent={"space-between"}>
-          {iconbox_items.map((v: iconBox, i: number) => {
-            return (
-              <Grid item md={3.8} sm={12}>
-                <Iconbox
-                  title={v.title}
-                  icon={v.icon}
-                  description={v.description}
-                />
-              </Grid>
-            );
-          })}
+        <AdverImage ImageSrc="/images/city.jpeg" search />
+        <Grid container display={"flex"} justifyContent={"center"}>
+          <Grid
+            mt={20}
+            item
+            justifyContent={"space-between"}
+            display={"flex"}
+            sx={{
+              width: { md: "70%", xs: "100%" },
+            }}
+          >
+            {iconbox_items.map((v: iconBox, i: number) => {
+              return (
+                <Grid item md={3.8} sm={12}>
+                  <Iconbox
+                    title={v.title}
+                    icon={v.icon}
+                    description={v.description}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
+        <Grid
+          mt={20}
+          sx={{
+            backgroundImage: "linear-gradient(#f9fdfd,#ddf0f2)",
+            p: 5,
+            pb: 10,
+          }}
+        >
+          <Typography textAlign={"center"} variant="h3">
+            شهر های دارای ملک
+          </Typography>
+          <Grid mt={5}>
+            <Carousel
+              slidesToShow={3}
+              dots={true}
+              infinite={true}
+              speed={500}
+              slidesToScroll={1}
+              data={Items}
+            />
+          </Grid>
         </Grid>
       </Main>
     </>

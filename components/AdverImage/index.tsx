@@ -2,16 +2,18 @@ import React from "react";
 import Appimage from "@/common/Appimage";
 import { Grid, Typography } from "@mui/material";
 import style from "./style.module.scss";
+import SearchSelect from "../SearchSelect";
 type Props = {
   ImageSrc: string;
   title: string;
   sub_title: string;
+  search: boolean;
 };
 
 const AdverImage: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid sx={{ position: "relative" }}>
-      <Grid sx={{ height: "400px" }}>
+      <Grid sx={{ height: "500px" }}>
         <Appimage src={props.ImageSrc} alt="/" />
       </Grid>
       <Grid
@@ -35,6 +37,7 @@ const AdverImage: React.FC<Partial<Props>> = (props) => {
         <Typography variant="h5" sx={{ color: "white" }}>
           {props.sub_title}
         </Typography>
+        {props.search && <SearchSelect />}
       </Grid>
     </Grid>
   );

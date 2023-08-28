@@ -72,7 +72,6 @@ const Header: React.FC<Partial<Props>> = (props) => {
       </Grid>
       <Grid md={5} sm={5} justifyContent={"flex-end"} container item>
         <Grid sx={{ display: "flex", alignItems: "center" }}>
-          <Appinput variant="outlined" sx={{ width: "200px" }} label="جستجو" />
           <Grid
             sx={{
               cursor: "pointer",

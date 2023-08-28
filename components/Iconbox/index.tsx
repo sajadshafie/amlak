@@ -1,6 +1,8 @@
 import React from "react";
 import Appimage from "@/common/Appimage";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useTheme } from "@mui/material";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import Applink from "@/common/Applink";
 type App = {
   icon: string;
   title: string;
@@ -8,6 +10,7 @@ type App = {
 };
 
 const Iconbox: React.FC<Partial<App>> = (props) => {
+  const theme = useTheme();
   return (
     <Grid
       sx={{
@@ -26,6 +29,18 @@ const Iconbox: React.FC<Partial<App>> = (props) => {
       <Typography textAlign={"center"} variant="subtitle2">
         {props.description}
       </Typography>
+      <Grid
+        mt={2}
+        display={"flex"}
+        alignItems={"center"}
+        sx={{ cursor: "pointer" }}
+      >
+        <Applink link="/" text="مشاهده بیشتر" />
+
+        <KeyboardBackspaceIcon
+          sx={{ color: theme.palette.primary.yellow, fontSize: 18, mr: 1 }}
+        />
+      </Grid>
     </Grid>
   );
 };

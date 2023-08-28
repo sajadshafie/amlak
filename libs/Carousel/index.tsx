@@ -1,17 +1,22 @@
 import React, { ReactNode } from "react";
 import Slider from "react-slick";
 import style from "./style.module.scss";
-type Props = {
+interface Props {
   data: ReactNode[];
-};
+  dots: boolean;
+  infinite: boolean;
+  speed: number;
+  slidesToShow: number;
+  slidesToScroll: number;
+}
 
 const Carousel: React.FC<Partial<Props>> = (props) => {
   const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    dots: props.dots,
+    infinite: props.infinite,
+    speed: props.speed,
+    slidesToShow: props.slidesToShow,
+    slidesToScroll: props.slidesToScroll,
   };
   return (
     <Slider {...settings}>
