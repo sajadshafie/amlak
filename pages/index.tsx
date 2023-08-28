@@ -6,6 +6,7 @@ import AdverImage from "@/components/AdverImage";
 import { Grid, Typography, useTheme } from "@mui/material";
 import Appimage from "@/common/Appimage";
 import ImageHover from "@/components/main/imageHover";
+import Product from "@/components/main/product";
 
 type iconBox = {
   title: string;
@@ -123,6 +124,9 @@ const Home = (): JSX.Element => {
               data={Items}
             />
           </Grid>
+        </Grid>
+        <Grid mt={20}>
+          <Product />
         </Grid>
       </Main>
     </>
