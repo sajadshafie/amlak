@@ -15,6 +15,7 @@ const Main: React.FC<Partial<Props>> = (props) => {
       <Header active={props.active} />
       <Grid
         sx={{
+          direction: "rtl",
           px: { xs: 2, md: 4 },
           width: "100%",
         }}

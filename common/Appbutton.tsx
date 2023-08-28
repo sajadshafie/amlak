@@ -14,6 +14,7 @@ interface Props {
   fullWidth: boolean;
   disabled: boolean;
   ariadescribedby: any;
+  textVariant: string;
 }
 
 const Appbutton: React.FC<Partial<Props>> = (props) => {
@@ -30,7 +31,7 @@ const Appbutton: React.FC<Partial<Props>> = (props) => {
       type={props.type}
     >
       <Typography
-        variant="h6"
+        variant={props.textVariant ? props.textVariant : "h6"}
         sx={{ color: props.variant == "contained" ? "white" : "#013a63" }}
       >
         {props.children}

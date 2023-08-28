@@ -1,7 +1,10 @@
 body {
   font-family: iransans !important;
-  direction: rtl;
+  direction: rtl !important;
 }
+/* * {
+  direction: rtl !important;
+} */
 
 @font-face {
   font-family: iransans;
