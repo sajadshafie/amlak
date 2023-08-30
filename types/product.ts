@@ -8,6 +8,8 @@ interface productType {
   id: number;
   introduction_code: number;
   price: string;
+  liked: boolean;
+  is_selled: boolean;
 }
 
 export default productType;

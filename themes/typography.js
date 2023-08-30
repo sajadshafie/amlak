@@ -32,6 +32,12 @@ export default function themeTypography(theme) {
       color: theme.heading,
       fontWeight: 600,
     },
+    h5number: {
+      fontFamily: "iransans_number",
+      fontSize: "0.875rem",
+      color: theme.heading,
+      fontWeight: 600,
+    },
     h5: {
       fontSize: "0.875rem",
       color: theme.heading,

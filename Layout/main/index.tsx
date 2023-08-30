@@ -19,7 +19,7 @@ const Main: React.FC<Partial<Props>> = (props) => {
           px: { xs: 2, md: 4 },
           width: "100%",
         }}
-        my={2}
+        mb={2}
       >
         {props.children}
       </Grid>

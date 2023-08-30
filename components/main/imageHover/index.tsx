@@ -31,7 +31,12 @@ const ImageHover: React.FC<Partial<types>> = (props) => {
         از طراحان گرافیک است، چاپگرها و از طراحان گرافیک است، چاپگرها و
       </Typography>
       <Grid mt={2}>
-        <Appbutton textVariant="h5" variant="outlined" fullWidth>
+        <Appbutton
+          textVariant="h5"
+          variant="outlined"
+          fullWidth
+          sx={{ borderRadius: 100 }}
+        >
           مشاهده همه
         </Appbutton>
       </Grid>

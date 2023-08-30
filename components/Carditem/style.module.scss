@@ -1,0 +1,9 @@
+@import "../../styles/pallete.module.scss";
+.card_hover:hover {
+  box-shadow: $primaryDark 0px 0px 5px 0px, $primaryDark 0px 0px 1px 0px;
+  // box-shadow:  $primaryMain 0px 0px 0px 1px;
+  // box-shadow: $primaryDark 0px 8px 24px;
+}
+.card_hover {
+  transition: 0.2s;
+}

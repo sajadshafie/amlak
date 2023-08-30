@@ -11,6 +11,12 @@ body {
   src: url(../public/fonts/IRANSans/IRANSans\ Regular/IRANSansRegular.ttf)
     format("truetype");
 }
+
+@font-face {
+  font-family: iransans_number;
+  src: url(../public/fonts/IRANSans/IRANSans\(FaNum\).ttf) format("truetype");
+  font-weight: 400;
+}
 .text_transition_main:hover {
   font-weight: 600;
   transition: 0.1s;

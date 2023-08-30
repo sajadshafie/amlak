@@ -4,9 +4,9 @@ import Iconbox from "@/components/Iconbox";
 import Carousel from "@/libs/Carousel";
 import AdverImage from "@/components/AdverImage";
 import { Grid, Typography, useTheme } from "@mui/material";
-import Appimage from "@/common/Appimage";
 import ImageHover from "@/components/main/imageHover";
 import Product from "@/components/main/product";
+import Whymehr from "@/components/main/Whymehr";
 
 type iconBox = {
   title: string;
@@ -75,7 +75,7 @@ const Home = (): JSX.Element => {
       icon: "/images/support.png",
     },
   ];
-
+  console.log(theme.palette.primary.main);
   return (
     <>
       <Main active={1}>
@@ -106,12 +106,13 @@ const Home = (): JSX.Element => {
         <Grid
           mt={20}
           sx={{
-            backgroundImage: "linear-gradient(#f9fdfd,#ddf0f2)",
+            backgroundColor: `${theme.palette.primary.main}`,
+            // "linear-gradient(#f9fdfd,#ddf0f2)"
             p: 5,
             pb: 10,
           }}
         >
-          <Typography textAlign={"center"} variant="h3">
+          <Typography textAlign={"center"} variant="h3" color={"white"}>
             شهر های دارای ملک
           </Typography>
           <Grid mt={5}>
@@ -125,8 +126,11 @@ const Home = (): JSX.Element => {
             />
           </Grid>
         </Grid>
-        <Grid mt={20}>
+        <Grid mt={15}>
           <Product />
+        </Grid>
+        <Grid mt={15}>
+          <Whymehr />
         </Grid>
       </Main>
     </>

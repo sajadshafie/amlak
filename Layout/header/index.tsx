@@ -35,7 +35,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid
       container
-      py={2}
+      // py={2}
       sx={{
         px: { xs: 2, md: 4 },
       }}
