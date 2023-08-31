@@ -38,6 +38,8 @@ const Header: React.FC<Partial<Props>> = (props) => {
       // py={2}
       sx={{
         px: { xs: 2, md: 4 },
+        maxWidth: { xs: "100%", xl: "1536px" },
+        margin: "0 auto",
       }}
       justifyContent={"space-between"}
       alignItems={"center"}

@@ -5,6 +5,7 @@ import Appimage from "@/common/Appimage";
 import Appbutton from "@/common/Appbutton";
 import style from "./style.module.scss";
 import Likedbox from "./Likedbox";
+import AppTooltip from "@/libs/Tooltip";
 const Carditem: React.FC<Partial<productType>> = (props) => {
   const hanldeLike = () => {};
 
@@ -27,7 +28,9 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
           zIndex: 500,
         }}
       >
-        <Likedbox hanldeLike={hanldeLike} />
+        <AppTooltip title="افزودن به علاقه مندی">
+          <Likedbox hanldeLike={hanldeLike} />
+        </AppTooltip>
       </Grid>
       <Grid height={"150px"}>
         <Appimage

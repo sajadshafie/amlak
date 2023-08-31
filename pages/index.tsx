@@ -2,9 +2,9 @@ import React from "react";
 import Main from "@/Layout/main";
 import Iconbox from "@/components/Iconbox";
 import Carousel from "@/libs/Carousel";
-import AdverImage from "@/components/AdverImage";
+import AdverImage from "@/components/main/AdverImage";
 import { Grid, Typography, useTheme } from "@mui/material";
-import ImageHover from "@/components/main/imageHover";
+import ImageHover from "@/components/imageHover";
 import Product from "@/components/main/product";
 import Whymehr from "@/components/main/Whymehr";
 
@@ -80,9 +80,15 @@ const Home = (): JSX.Element => {
     <>
       <Main active={1}>
         <AdverImage ImageSrc="/images/city.jpeg" search />
-        <Grid container display={"flex"} justifyContent={"center"}>
+        <Grid
+          container
+          display={"flex"}
+          justifyContent={"center"}
+          sx={{
+            maxWidth: { xs: "100%", lg: "1536px", margin: "160px auto 0 auto" },
+          }}
+        >
           <Grid
-            mt={20}
             item
             justifyContent={"space-between"}
             display={"flex"}
@@ -106,6 +112,7 @@ const Home = (): JSX.Element => {
         <Grid
           mt={20}
           sx={{
+            maxWidth: { xs: "100%", lg: "1536px", margin: "160px auto 0 auto" },
             backgroundColor: `${theme.palette.primary.main}`,
             // "linear-gradient(#f9fdfd,#ddf0f2)"
             p: 5,
@@ -126,10 +133,21 @@ const Home = (): JSX.Element => {
             />
           </Grid>
         </Grid>
-        <Grid mt={15}>
+        <Grid
+          mt={15}
+          sx={{
+            px: { xs: 2, md: 4 },
+          }}
+        >
           <Product />
         </Grid>
-        <Grid mt={15}>
+        <Grid
+          sx={{
+            maxWidth: { xs: "100%", xl: "1536px" },
+            margin: "120px auto 0 auto",
+            px: { xs: 2, md: 4 },
+          }}
+        >
           <Whymehr />
         </Grid>
       </Main>

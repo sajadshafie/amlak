@@ -1,6 +1,8 @@
 body {
   font-family: iransans !important;
   direction: rtl !important;
+  padding: 0;
+  margin: 0;
 }
 /* * {
   direction: rtl !important;
@@ -40,4 +42,7 @@ body {
 }
 .slick-slide > div {
   padding: 0 5px;
+}
+.text_underline:hover {
+  text-decoration: underline;
 }
