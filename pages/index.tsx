@@ -75,7 +75,7 @@ const Home = (): JSX.Element => {
       icon: "/images/support.png",
     },
   ];
-  console.log(theme.palette.primary.main);
+
   return (
     <>
       <Main active={1}>

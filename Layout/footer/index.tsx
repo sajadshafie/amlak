@@ -7,14 +7,26 @@ type typeItem = {
   children: string[];
 };
 
+type iconsType = {
+  image: string;
+  width: string;
+};
+
 const Footer: React.FC = () => {
   const theme = useTheme();
+  const icons: iconsType[] = [
+    { image: "/images/footer/telegram.png", width: "50px" },
+    { image: "/images/footer/instagram.png", width: "35px" },
+    { image: "/images/footer/whatsapp.png", width: "45px" },
+  ];
 
   return (
     <Grid
       mt={20}
       sx={{
         backgroundImage: `linear-gradient(#024f86,${theme.palette.primary.main})`,
+        position: "relative",
+        pb: "200px",
       }}
     >
       <Grid
@@ -47,10 +59,35 @@ const Footer: React.FC = () => {
             </Grid>
           );
         })}
+        <Grid>
+          <Typography variant="h4" mb={4} sx={{ color: "white" }}>
+            راه ها ارتباطی با ما
+          </Typography>
+          <Grid display={"flex"} alignItems={"center"}>
+            {icons.map((v: iconsType, i: number) => {
+              return (
+                <Grid
+                  sx={{
+                    cursor: "pointer",
+                    width: v.width,
+                    height: "40px",
+                    ml: 1,
+                  }}
+                  key={i}
+                >
+                  <Appimage src={v.image} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
       </Grid>
       <Grid
-        height={"200px"}
+        height={"400px"}
         sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
           width: { xs: "100%", sm: "90%", md: "70%", xl: "750px" },
           marginRight: "auto",
         }}
