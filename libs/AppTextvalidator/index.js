@@ -12,12 +12,14 @@ class AppTextValidator extends ValidatorComponent {
       requiredError,
       value,
       placeholder,
+      fullWidth,
       ...rest
     } = this.props;
 
     return (
       <>
         <Appinput
+          fullWidth={fullWidth}
           value={value}
           onChange={onChange}
           placeholder={placeholder}

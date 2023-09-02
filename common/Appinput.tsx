@@ -13,6 +13,7 @@ type Props = {
   value: string;
   onChange: () => void;
   sx: React.CSSProperties | object;
+  fullWidth: boolean;
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
@@ -79,12 +80,18 @@ const Appinput: React.FC<Partial<Props>> = (props) => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={themes}>
         <TextField
+          fullWidth={props.fullWidth}
           id="outlined-basic"
           label={props.label}
           variant={props.variant}
           value={props.value}
           onChange={props.onChange}
-          sx={props.sx}
+          sx={{
+            ...props.sx,
+            "& .MuiInputBase-input": {
+              height: "10px", // Adjust the height as needed
+            },
+          }}
           // InputLabelProps={{
           //   style: { color: "red" },
           // }}

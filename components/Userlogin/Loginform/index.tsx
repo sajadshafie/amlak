@@ -31,16 +31,20 @@ const Loginform: React.FC = () => {
   return (
     <Grid>
       <ValidatorForm ref={refForm} onSubmit={handleSubmit} onError={onError}>
+        <Grid>
+          <AppTextValidator
+            fullWidth
+            label={"نام کاربری"}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              onChangeForm(e.target.value, "username")
+            }
+            validators={require}
+            errorMessages={errMessage}
+            value={form.username}
+          />
+        </Grid>
         <AppTextValidator
-          label={"نام کاربری"}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChangeForm(e.target.value, "username")
-          }
-          validators={require}
-          errorMessages={errMessage}
-          value={form.username}
-        />
-        <AppTextValidator
+          fullWidth
           validators={require}
           errorMessages={errMessage}
           label={"رمز عبور"}
