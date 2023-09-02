@@ -14,6 +14,7 @@ type Props = {
   onChange: () => void;
   sx: React.CSSProperties | object;
   fullWidth: boolean;
+  error:boolean
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
@@ -80,6 +81,7 @@ const Appinput: React.FC<Partial<Props>> = (props) => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={themes}>
         <TextField
+        error={props.error}
           fullWidth={props.fullWidth}
           id="outlined-basic"
           label={props.label}

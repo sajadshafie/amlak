@@ -3,6 +3,7 @@ import { Grid, Typography } from "@mui/material";
 import React, { useRef, useState, ChangeEvent } from "react";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import AppTextValidator from "@/libs/AppTextvalidator";
+import AuthLayout from "@/Layout/authLayout";
 
 type formType = {
   username: string;
@@ -29,20 +30,20 @@ const Loginform: React.FC = () => {
   const require: string[] = ["required"];
   const refForm = useRef("form");
   return (
-    <Grid>
-      <ValidatorForm ref={refForm} onSubmit={handleSubmit} onError={onError}>
-        <Grid>
-          <AppTextValidator
-            fullWidth
-            label={"نام کاربری"}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              onChangeForm(e.target.value, "username")
-            }
-            validators={require}
-            errorMessages={errMessage}
-            value={form.username}
-          />
-        </Grid>
+    <ValidatorForm ref={refForm} onSubmit={handleSubmit} onError={onError}>
+      <Grid mb={2}>
+        <AppTextValidator
+          fullWidth
+          label={"نام کاربری"}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChangeForm(e.target.value, "username")
+          }
+          validators={require}
+          errorMessages={errMessage}
+          value={form.username}
+        />
+      </Grid>
+      <Grid mb={1}>
         <AppTextValidator
           fullWidth
           validators={require}
@@ -53,11 +54,11 @@ const Loginform: React.FC = () => {
           }
           value={form.password}
         />
-        <Appbutton type="submit" variant="contained">
-          ورود
-        </Appbutton>
-      </ValidatorForm>
-    </Grid>
+      </Grid>
+      <Appbutton type="submit" variant="contained">
+        ورود
+      </Appbutton>
+    </ValidatorForm>
   );
 };
 

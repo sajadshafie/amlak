@@ -1,12 +1,12 @@
 import React from "react";
-import { Grid } from "@mui/material";
-import Main from "@/Layout/main";
+
 import Userlogin from "@/components/Userlogin";
+import AuthLayout from "@/Layout/authLayout";
 const index = (): JSX.Element => {
   return (
-    <Main>
+    <AuthLayout>
       <Userlogin />
-    </Main>
+    </AuthLayout>
   );
 };
 

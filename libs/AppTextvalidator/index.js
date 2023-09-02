@@ -19,6 +19,7 @@ class AppTextValidator extends ValidatorComponent {
     return (
       <>
         <Appinput
+          error={!this.state.isValid}
           fullWidth={fullWidth}
           value={value}
           onChange={onChange}
