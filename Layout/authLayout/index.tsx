@@ -20,10 +20,11 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
         container
         justifyContent={"space-between"}
       >
-        <Grid item xs={12}>
-          <Typography>{props.title}</Typography>
-        </Grid>
+        <Grid item xs={12}></Grid>
         <Grid item xs={12} sm={4}>
+          <Typography variant="h3" mb={2}>
+            {props.title}
+          </Typography>
           {props.children}
         </Grid>
       </Grid>

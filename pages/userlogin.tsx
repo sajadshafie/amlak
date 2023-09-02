@@ -4,7 +4,7 @@ import Userlogin from "@/components/Userlogin";
 import AuthLayout from "@/Layout/authLayout";
 const index = (): JSX.Element => {
   return (
-    <AuthLayout>
+    <AuthLayout title="ورود کاربر">
       <Userlogin />
     </AuthLayout>
   );
