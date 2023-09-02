@@ -17,9 +17,7 @@ export default function ColorTypography() {
     divider: color.grey700,
     menuColor: color.menuColor,
     grey300: color.grey300,
-    customization,
   };
 
   return themeOption;
 }
-import React from "react";

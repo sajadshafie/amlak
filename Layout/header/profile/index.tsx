@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-
+import Link from "next/link";
+import Applink from "@/common/Applink";
+import Applink2 from "@/common/Applink2";
 const Profile: React.FC = () => {
   return (
     <Box
@@ -21,7 +23,7 @@ const Profile: React.FC = () => {
         mb={1}
         variant="subtitle2"
       >
-        پروفایل من
+        <Applink2 text="ورود کابر" link="/userlogin" />
       </Typography>
       <Typography
         sx={{
@@ -31,16 +33,7 @@ const Profile: React.FC = () => {
         mb={1}
         variant="subtitle2"
       >
-        تنظیمات
-      </Typography>
-      <Typography
-        sx={{
-          cursor: "pointer",
-        }}
-        className="text_transition_sub"
-        variant="subtitle2"
-      >
-        خروج
+        <Applink2 text="ورود فروشنده" link="/" />
       </Typography>
     </Box>
   );

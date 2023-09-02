@@ -81,11 +81,61 @@ const Home = (): JSX.Element => {
       <Main active={1}>
         <AdverImage ImageSrc="/images/city.jpeg" search />
         <Grid
+          sx={{
+            maxWidth: { xs: "100%", xl: "1536px" },
+            margin: "200px auto 0 auto",
+            px: { xs: 2, md: 4 },
+          }}
+        >
+          <Whymehr />
+        </Grid>
+
+        <Grid
+          mt={"200px"}
+          sx={{
+            maxWidth: "100%",
+            backgroundColor: `${theme.palette.primary.main}`,
+            // "linear-gradient(#f9fdfd,#ddf0f2)"
+            p: 5,
+            pb: 10,
+          }}
+        >
+          <Typography textAlign={"center"} variant="h3" color={"white"}>
+            شهر های دارای ملک
+          </Typography>
+          <Grid
+            sx={{
+              maxWidth: {
+                xs: "100%",
+                lg: "1536px",
+                margin: "60px auto 0 auto",
+              },
+            }}
+          >
+            <Carousel
+              slidesToShow={3}
+              dots={true}
+              infinite={true}
+              speed={500}
+              slidesToScroll={1}
+              data={Items}
+            />
+          </Grid>
+        </Grid>
+        <Grid
+          mt={"200px"}
+          sx={{
+            px: { xs: 2, md: 4 },
+          }}
+        >
+          <Product />
+        </Grid>
+        <Grid
           container
           display={"flex"}
           justifyContent={"center"}
           sx={{
-            maxWidth: { xs: "100%", lg: "1536px", margin: "160px auto 0 auto" },
+            maxWidth: { xs: "100%", lg: "1536px", margin: "200px auto 0 auto" },
           }}
         >
           <Grid
@@ -108,47 +158,6 @@ const Home = (): JSX.Element => {
               );
             })}
           </Grid>
-        </Grid>
-        <Grid
-          mt={20}
-          sx={{
-            maxWidth: { xs: "100%", lg: "1536px", margin: "160px auto 0 auto" },
-            backgroundColor: `${theme.palette.primary.main}`,
-            // "linear-gradient(#f9fdfd,#ddf0f2)"
-            p: 5,
-            pb: 10,
-          }}
-        >
-          <Typography textAlign={"center"} variant="h3" color={"white"}>
-            شهر های دارای ملک
-          </Typography>
-          <Grid mt={5}>
-            <Carousel
-              slidesToShow={3}
-              dots={true}
-              infinite={true}
-              speed={500}
-              slidesToScroll={1}
-              data={Items}
-            />
-          </Grid>
-        </Grid>
-        <Grid
-          mt={15}
-          sx={{
-            px: { xs: 2, md: 4 },
-          }}
-        >
-          <Product />
-        </Grid>
-        <Grid
-          sx={{
-            maxWidth: { xs: "100%", xl: "1536px" },
-            margin: "120px auto 0 auto",
-            px: { xs: 2, md: 4 },
-          }}
-        >
-          <Whymehr />
         </Grid>
       </Main>
     </>
