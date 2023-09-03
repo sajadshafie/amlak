@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
     <Grid
       mt={20}
       sx={{
-        backgroundImage: `linear-gradient(#024f86,${theme.palette.primary.main})`,
+        backgroundColor: `${theme.palette.primary.main}`,
         position: "relative",
         pb: "200px",
       }}

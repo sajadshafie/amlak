@@ -15,6 +15,7 @@ type Props = {
   sx: React.CSSProperties | object;
   fullWidth: boolean;
   error: boolean;
+  type: string | "number" | "password" | "text";
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
@@ -81,6 +82,7 @@ const Appinput: React.FC<Partial<Props>> = (props) => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={themes}>
         <TextField
+          type={props.type}
           error={props.error}
           fullWidth={props.fullWidth}
           id="outlined-basic"
@@ -91,7 +93,8 @@ const Appinput: React.FC<Partial<Props>> = (props) => {
           sx={{
             ...props.sx,
             "& .MuiInputBase-input": {
-              height: "10px", // Adjust the height as needed
+              backgroundColor: "white",
+              height: "20px", // Adjust the height as needed
             },
           }}
           // InputLabelProps={{

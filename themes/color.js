@@ -14,9 +14,10 @@ export default function ColorTypography() {
     textLight: color.secondaryLight,
     menuSelected: color.secondaryLight,
     menuSelectedBack: color.selectedColor,
-    divider: color.grey700,
+    divider: color.yellow100,
     menuColor: color.menuColor,
     grey300: color.grey300,
+    yellow100: color.yellow100,
   };
 
   return themeOption;

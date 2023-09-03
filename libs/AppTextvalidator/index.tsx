@@ -1,9 +1,31 @@
-import React from "react";
+import React, { ChangeEvent, RefObject } from "react";
+import { Typography, TextFieldProps } from "@mui/material";
 import { ValidatorComponent } from "react-material-ui-form-validator";
-import { Typography } from "@mui/material";
 import Appinput from "@/common/Appinput";
-// import Textarea from '@mui/joy/Textarea';
-class AppTextValidator extends ValidatorComponent {
+
+type AppTextValidatorProps = TextFieldProps & {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  errorMessages: string[];
+  validators?: string[];
+  requiredError?: string;
+  value?: string;
+  placeholder?: string;
+  fullWidth?: boolean;
+  type?: string;
+};
+interface AppTextValidatorState {
+  isValid: boolean;
+}
+class AppTextValidator extends ValidatorComponent<
+  Partial<AppTextValidatorProps, AppTextValidatorState>
+> {
+  private inputRef: RefObject<HTMLInputElement>;
+
+  constructor(props: AppTextValidatorProps) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
   renderValidatorComponent() {
     const {
       onChange,
@@ -13,12 +35,14 @@ class AppTextValidator extends ValidatorComponent {
       value,
       placeholder,
       fullWidth,
+      type,
       ...rest
     } = this.props;
 
     return (
       <>
         <Appinput
+          type={type}
           error={!this.state.isValid}
           fullWidth={fullWidth}
           value={value}
@@ -26,9 +50,7 @@ class AppTextValidator extends ValidatorComponent {
           placeholder={placeholder}
           minRows={4}
           {...rest}
-          ref={(r) => {
-            this.input = r;
-          }}
+          ref={this.inputRef}
         />
         {this.errorText()}
       </>

@@ -22,7 +22,8 @@
     "**/*.ts",
     "**/*.tsx",
     "palette/typography.js",
-    "themes/compStyleOverride.js"
+    "themes/compStyleOverride.js",
+    "libs/AppTextvalidator/index.js"
   ],
   "exclude": ["node_modules"]
 }

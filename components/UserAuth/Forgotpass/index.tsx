@@ -2,16 +2,15 @@ import Appbutton from "@/common/Appbutton";
 import { Grid, Typography } from "@mui/material";
 import React, { useRef, useState, ChangeEvent } from "react";
 import AppTextValidator from "@/libs/AppTextvalidator";
-
+import { ValidatorForm } from "react-material-ui-form-validator";
+import Applink from "@/common/Applink";
 type formType = {
-  username: string;
-  password: string;
+  phone_number: string;
 };
 
-const Loginform: React.FC = () => {
+const Forgotpassword: React.FC = () => {
   const [form, setForm] = useState<formType>({
-    username: "",
-    password: "",
+    phone_number: "",
   });
   const handleSubmit = () => {};
   const onError = (err: any) => {
@@ -24,37 +23,36 @@ const Loginform: React.FC = () => {
       [type]: value,
     });
   };
+  const onSubmitForm = () => {};
   const errMessage: string[] = ["این فیلد نمیتواند خالی باشد"];
   const require: string[] = ["required"];
-  const refForm = useRef("form");
+  const refForm = useRef<any>("form");
   return (
-    <Grid>
+    <ValidatorForm ref={refForm} onSubmit={onSubmitForm}>
       <Grid mb={2}>
         <AppTextValidator
           fullWidth
-          label={"نام کاربری"}
+          label={"شماره همراه"}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChangeForm(e.target.value, "username")
+            onChangeForm(e.target.value, "phone_number")
           }
+          type="number"
           validators={require}
           errorMessages={errMessage}
-          value={form.username}
+          value={form.phone_number}
         />
       </Grid>
-      <Grid mb={1}>
-        <AppTextValidator
-          fullWidth
-          validators={require}
-          errorMessages={errMessage}
-          label={"رمز عبور"}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChangeForm(e.target.value, "password")
-          }
-          value={form.password}
-        />
+      <Grid
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+      >
+        <Appbutton type="submit" variant="contained">
+          ارسال کد
+        </Appbutton>
       </Grid>
-    </Grid>
+    </ValidatorForm>
   );
 };
 
-export default Loginform;
+export default Forgotpassword;

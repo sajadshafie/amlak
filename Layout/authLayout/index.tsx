@@ -1,34 +1,77 @@
 import React from "react";
-import Main from "../main";
-import { Grid, Typography } from "@mui/material";
-import Appimage from "@/common/Appimage";
 
+import { Divider, Grid, Typography, useTheme } from "@mui/material";
+import Appimage from "@/common/Appimage";
+import HomeIcon from "@mui/icons-material/Home";
+import Applink from "@/common/Applink";
 type authLayoutType = {
   children: React.ReactNode;
   title: string;
+  sub_title: string;
+  description: string;
 };
 
 const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
+  const theme = useTheme();
   return (
-    <Main>
+    <>
       <Grid
         sx={{
           maxWidth: { xs: "100%", xl: "1536px" },
-          margin: "160px  auto 0 auto",
-          px: { xs: 2, sm: 4 },
+          margin: "0 auto",
         }}
         container
-        justifyContent={"space-between"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        height={"100vh"}
       >
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h3" mb={2}>
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sm={7}
+          sx={{
+            borderColor: theme.palette.grey[300],
+            borderWidth: "1px",
+            borderStyle: "solid",
+            py: 10,
+            px: 5,
+            borderRadius: "12px",
+          }}
+        >
+          <Grid xs={12} item justifyContent={"center"} display={"flex"} mb={2}>
+            <HomeIcon
+              sx={{
+                color: "white",
+                fontSize: "30px",
+                backgroundColor: theme.palette.primary.main,
+                p: 2.5,
+                borderRadius: "100%",
+              }}
+            />
+            <Typography variant="h6" sx={{ color: "white" }}>
+              خانه
+            </Typography>
+          </Grid>
+
+          <Typography variant="h3" mb={2} textAlign={"center"}>
             {props.title}
           </Typography>
+          <Grid mb={2}>
+            <Typography variant="caption">{props.description}</Typography>
+          </Grid>
           {props.children}
+          <Typography mt={4} variant="h6">
+            ورود شما به معنای پذیرش <Applink text="شرایط املاک مهر" link="/" />{" "}
+            و <Applink text="قوانین و حریم خصوصی" link="/" /> است
+          </Typography>
         </Grid>
+
+        {/* <Grid item xs={0} md={7} sm={6}>
+          <Appimage src="/images/city3.jpeg" />
+        </Grid> */}
       </Grid>
-    </Main>
+    </>
   );
 };
 

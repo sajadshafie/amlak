@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
         mb={1}
         variant="subtitle2"
       >
-        <Applink2 text="ورود کابر" link="/userlogin" />
+        <Applink2 text="ثبت نام فروشنده" link="/provider/register" />
       </Typography>
       <Typography
         sx={{
@@ -33,7 +33,17 @@ const Profile: React.FC = () => {
         mb={1}
         variant="subtitle2"
       >
-        <Applink2 text="ورود فروشنده" link="/" />
+        <Applink2 text="ورود فروشنده" link="/provider/login" />
+      </Typography>
+      <Typography
+        sx={{
+          cursor: "pointer",
+        }}
+        className="text_transition_sub"
+        mb={1}
+        variant="subtitle2"
+      >
+        <Applink2 text="ثبت آگهی" link="/provider/saveproduct" />
       </Typography>
     </Box>
   );

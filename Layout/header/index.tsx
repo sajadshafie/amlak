@@ -5,7 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import style from "./style.module.scss";
 import Appbutton from "@/common/Appbutton";
 import Profile from "./profile";
-import Appinput from "@/common/Appinput";
+import { useRouter } from "next/router";
 
 type Menu = {
   title: string;
@@ -20,7 +20,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-
+  const router = useRouter();
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -35,7 +35,6 @@ const Header: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid
       container
-      // py={2}
       sx={{
         px: { xs: 2, md: 4 },
         maxWidth: { xs: "100%", xl: "1536px" },
@@ -86,10 +85,23 @@ const Header: React.FC<Partial<Props>> = (props) => {
           >
             <PersonIcon sx={{ fontSize: "25px" }} />
             <Typography variant="caption" className="text_transition_sub">
-              پروفایل
+              ورود فروشنده
             </Typography>
           </Grid>
-          <Appbutton variant="contained">ثبت اگهی</Appbutton>
+          {/* <Appbutton variant="contained">ثبت اگهی</Appbutton> */}
+          <Appbutton
+            variant="contained"
+            sx={{ ml: 1 }}
+            onClick={() => router.push("/register")}
+          >
+            ثبت نام کاربر
+          </Appbutton>
+          <Appbutton
+            variant="outlined"
+            onClick={() => router.push("/userlogin")}
+          >
+            ورود کاربر
+          </Appbutton>
         </Grid>
 
         <Popover
