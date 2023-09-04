@@ -55,7 +55,7 @@ const Registerform: React.FC = () => {
         <AppTextValidator
           type="number"
           fullWidth
-          label={"شماره همراه*"}
+          label={"شماره موبایل*"}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             onChangeForm(e.target.value, "phone_number")
           }

@@ -4,7 +4,7 @@ import AuthLayout from "@/Layout/authLayout";
 const index = (): JSX.Element => {
   return (
     <AuthLayout
-      title="ورود کاربر"
+      title="ورود به حساب کاربری"
       sub_title=" ورود به مشاور املاک انلاین"
       description="لطفا اطلاعات خود را وارد کنید"
     >

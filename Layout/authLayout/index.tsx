@@ -2,8 +2,10 @@ import React from "react";
 
 import { Divider, Grid, Typography, useTheme } from "@mui/material";
 import Appimage from "@/common/Appimage";
-import HomeIcon from "@mui/icons-material/Home";
+import LockIcon from "@mui/icons-material/Lock";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Applink from "@/common/Applink";
+import Main from "../main";
 type authLayoutType = {
   children: React.ReactNode;
   title: string;
@@ -14,7 +16,7 @@ type authLayoutType = {
 const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
   const theme = useTheme();
   return (
-    <>
+    <Main>
       <Grid
         sx={{
           maxWidth: { xs: "100%", xl: "1536px" },
@@ -23,7 +25,7 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
         container
         justifyContent={"center"}
         alignItems={"center"}
-        height={"100vh"}
+        minHeight={"100vh"}
       >
         <Grid
           item
@@ -32,15 +34,15 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
           sm={7}
           sx={{
             borderColor: theme.palette.grey[300],
-            borderWidth: "1px",
-            borderStyle: "solid",
+
             py: 10,
             px: 5,
             borderRadius: "12px",
+            position: "relative",
           }}
         >
           <Grid xs={12} item justifyContent={"center"} display={"flex"} mb={2}>
-            <HomeIcon
+            <LockIcon
               sx={{
                 color: "white",
                 fontSize: "30px",
@@ -54,7 +56,7 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
             </Typography>
           </Grid>
 
-          <Typography variant="h3" mb={2} textAlign={"center"}>
+          <Typography variant="h3" mb={2} textAlign={"right"}>
             {props.title}
           </Typography>
           <Grid mb={2}>
@@ -71,7 +73,7 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
           <Appimage src="/images/city3.jpeg" />
         </Grid> */}
       </Grid>
-    </>
+    </Main>
   );
 };
 

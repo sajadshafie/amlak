@@ -34,7 +34,7 @@ const Loginform: React.FC = () => {
       <Grid mb={2}>
         <AppTextValidator
           fullWidth
-          label={"نام کاربری"}
+          label={"شماره موبایل"}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             onChangeForm(e.target.value, "username")
           }

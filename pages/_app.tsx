@@ -1,3 +1,4 @@
+import { createContext, useState } from "react";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -5,8 +6,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import themes from "../themes/index";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import contextType from "@/types/contenxt";
+const context = createContext<any>(null);
 export default function App({ Component, pageProps }: AppProps) {
+  const [state, setState] = useState<contextType>({
+    save_product: false,
+  });
   return (
     <>
       <Head>
@@ -15,9 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider theme={themes}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <context.Provider value={{ state, setState }}>
+        <ThemeProvider theme={themes}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </context.Provider>
     </>
   );
 }

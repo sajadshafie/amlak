@@ -5,7 +5,7 @@ import style from "./style.module.scss";
 
 type Appprops = {
   link: string;
-  text: string;
+  text: string | React.ReactNode;
 };
 
 const Applink: React.FC<Partial<Appprops>> = (props) => {

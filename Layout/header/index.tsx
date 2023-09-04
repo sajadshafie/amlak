@@ -6,10 +6,11 @@ import style from "./style.module.scss";
 import Appbutton from "@/common/Appbutton";
 import Profile from "./profile";
 import { useRouter } from "next/router";
-
+import Applink from "@/common/Applink";
 type Menu = {
   title: string;
   id: number;
+  link: string;
 };
 
 type Props = {
@@ -52,15 +53,23 @@ const Header: React.FC<Partial<Props>> = (props) => {
               className={style.item_hover}
               sx={{ cursor: "pointer" }}
             >
-              <Typography
-                className={`${
-                  props.active == v.id && "text_active_main"
-                } text_transition_main `}
-                variant="h5"
-                key={i}
-              >
-                {v.title}
-              </Typography>
+              <Applink
+                link={v.link}
+                text={
+                  <>
+                    <Typography
+                      className={`${
+                        props.active == v.id && "text_active_main"
+                      } text_transition_main `}
+                      variant="h5"
+                      key={i}
+                    >
+                      {v.title}
+                    </Typography>
+                  </>
+                }
+              />
+
               <Typography
                 mt={0.5}
                 className={`${
@@ -92,15 +101,9 @@ const Header: React.FC<Partial<Props>> = (props) => {
           <Appbutton
             variant="contained"
             sx={{ ml: 1 }}
-            onClick={() => router.push("/register")}
+            onClick={() => router.push("/login")}
           >
-            ثبت نام کاربر
-          </Appbutton>
-          <Appbutton
-            variant="outlined"
-            onClick={() => router.push("/userlogin")}
-          >
-            ورود کاربر
+            ثبت اگهی
           </Appbutton>
         </Grid>
 
