@@ -2,14 +2,14 @@ import React, { ReactNode } from "react";
 import { Button, Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 type ButtonVariant = "text" | "outlined" | "contained";
-
+export interface ButtonPropsVariantOverrides {}
 interface Props {
   children: ReactNode;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type: string;
   loading: boolean;
   sx: object | React.CSSProperties;
-  variant: string | ButtonVariant;
+  variant: "text" | "outlined" | "contained" | string;
   color: string;
   fullWidth: boolean;
   disabled: boolean;
@@ -24,9 +24,11 @@ const Appbutton: React.FC<Partial<Props>> = (props) => {
       disabled={props.disabled}
       fullWidth={props.fullWidth}
       variant={props.variant}
-      // color={props.color}
       style={{ textTransform: "none" }}
-      sx={props.sx}
+      sx={{
+        ...props.sx,
+        py: 1.5,
+      }}
       onClick={props.onClick}
       type={props.type}
     >

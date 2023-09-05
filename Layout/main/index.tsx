@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Grid } from "@mui/material";
 import Header from "../header";
 import Footer from "../footer";
-import AdverImage from "@/components/main/AdverImage";
+import AdverImage from "@/components/Home/AdverImage";
 
 type Props = {
   children: ReactNode;

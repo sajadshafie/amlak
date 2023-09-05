@@ -13,7 +13,7 @@ const Whymehr: React.FC = () => {
       </Grid>
       <Grid item sm={5.8} xs={12}>
         <Typography variant="h4" mb={2}>
-          چرا املاک مهر را انتخاب کنیم؟
+          چرا تالار ملک را انتخاب کنیم؟
         </Typography>
         <Typography variant="body2" mb={1}>
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با

@@ -98,11 +98,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
             </Typography>
           </Grid>
           {/* <Appbutton variant="contained">ثبت اگهی</Appbutton> */}
-          <Appbutton
-            variant="contained"
-            sx={{ ml: 1 }}
-            onClick={() => router.push("/login")}
-          >
+          <Appbutton variant="contained" sx={{ ml: 1 }}>
             ثبت اگهی
           </Appbutton>
         </Grid>

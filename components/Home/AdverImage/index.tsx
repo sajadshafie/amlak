@@ -2,7 +2,7 @@ import React from "react";
 import Appimage from "@/common/Appimage";
 import { Grid, Typography } from "@mui/material";
 import style from "./style.module.scss";
-import SearchSelect from "../../SearchSelect";
+import SearchSelect from "../SearchSelect";
 type Props = {
   ImageSrc: string;
   title: string;

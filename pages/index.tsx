@@ -1,10 +1,10 @@
 import React from "react";
 import Main from "@/Layout/main";
-import Iconbox from "@/components/Iconbox";
+import Iconbox from "@/components/Home/Iconbox";
 import Carousel from "@/libs/Carousel";
-import AdverImage from "@/components/main/AdverImage";
+import AdverImage from "@/components/Home/AdverImage";
 import { Grid, Typography, useTheme } from "@mui/material";
-import ImageHover from "@/components/imageHover";
+import ImageHover from "@/components/Home/imageHover";
 import Product from "@/components/main/product";
 import Whymehr from "@/components/main/Whymehr";
 

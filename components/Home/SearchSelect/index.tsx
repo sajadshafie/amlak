@@ -2,7 +2,7 @@ import Appbutton from "@/common/Appbutton";
 import Appselect from "@/common/Appselect";
 import { Grid } from "@mui/material";
 import React from "react";
-import { city } from "./city";
+import { city } from "@/global/city";
 import { typePropery } from "./typeProperty";
 import { meter } from "./meter";
 const SearchSelect: React.FC = (props) => {
