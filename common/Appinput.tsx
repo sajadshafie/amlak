@@ -7,6 +7,8 @@ import createCache from "@emotion/cache";
 import themeTypography from "@/themes/typography";
 import ColorTypography from "@/themes/color";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// TextFieldPropsSizeOverrides
+import { TextFieldPropsSizeOverrides } from "@mui/material";
 type Props = {
   label: string;
   variant: "standard" | "outlined" | "filled";
@@ -16,6 +18,7 @@ type Props = {
   fullWidth: boolean;
   error: boolean;
   type: string | "number" | "password" | "text";
+  size: "small" | "medium" | TextFieldPropsSizeOverrides;
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
@@ -90,11 +93,11 @@ const Appinput: React.FC<Partial<Props>> = (props) => {
           variant={props.variant}
           value={props.value}
           onChange={props.onChange}
+          size={props.size}
           sx={{
             ...props.sx,
             "& .MuiInputBase-input": {
               backgroundColor: "white",
-              height: "20px", // Adjust the height as needed
             },
           }}
           // InputLabelProps={{

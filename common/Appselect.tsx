@@ -25,6 +25,7 @@ type Typeselect = {
   error: boolean;
   fullWidth: boolean;
   variant: string | "filled" | "standard" | any;
+  size: "small" | "medium" | any;
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
@@ -90,21 +91,21 @@ const Appselect: React.FC<Partial<Typeselect>> = (props) => {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={themes}>
-        <FormControl variant={props.variant} sx={props.sx}>
-          <InputLabel id="demo-simple-select-standard-label">
+        <FormControl size={props.size} variant={props.variant} sx={props.sx}>
+          <InputLabel
+            style={{ paddingRight: props.variant == "standard" ? 23 : 0 }}
+          >
             {props.label}
           </InputLabel>
           <Select
             sx={{
               ...props.sx,
               "& .MuiInputBase-input": {
-                backgroundColor: "white",
-                height: "40px",
+                backgroundColor: props.variant !== "standard" && "white",
+                // height: "40px",
               },
             }}
             native={false}
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
             value={props.value}
             onChange={props.handleChange}
             label={props.label}
