@@ -79,6 +79,7 @@ const Home = (): JSX.Element => {
   return (
     <>
       <Main active={1}>
+        <AdverImage ImageSrc="/images/city.jpeg" search />
         <Grid
           sx={{
             maxWidth: { xs: "100%", xl: "1536px" },

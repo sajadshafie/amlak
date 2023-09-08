@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { product_item } from "./Items";
 import productType from "@/types/product";
-import Carditem from "@/components/Home/Carditem";
+import Carditem from "@/libs/Carditem";
 const Product: React.FC = () => {
   return (
     <Grid

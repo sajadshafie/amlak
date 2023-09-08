@@ -32,7 +32,7 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
           <Likedbox hanldeLike={hanldeLike} />
         </AppTooltip>
       </Grid>
-      <Grid height={"150px"}>
+      <Grid height={"200px"}>
         <Appimage
           style={{ borderRadius: "12px 12px 0 0 " }}
           src={props.image}

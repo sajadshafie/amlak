@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
         mb={1}
         variant="subtitle2"
       >
-        <Applink2 text="ثبت نام فروشنده" link="/provider/register" />
+        <Applink2 text="ثبت نام فروشنده" link="/register" />
       </Typography>
       <Typography
         sx={{
@@ -33,7 +33,7 @@ const Profile: React.FC = () => {
         mb={1}
         variant="subtitle2"
       >
-        <Applink2 text="ورود فروشنده" link="/provider/login" />
+        <Applink2 text="ورود فروشنده" link="/login" />
       </Typography>
       <Typography
         sx={{
