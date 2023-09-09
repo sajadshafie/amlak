@@ -1,0 +1,32 @@
+.open_menu {
+  width: 250px;
+  padding: 16px;
+  margin-right: 16px;
+  margin-top: 16px;
+  animation: anim_open 0.2s;
+  height: 88vh;
+}
+.close_menu {
+  width: 0px;
+  animation: anim_close 0.2s;
+  height: 88vh;
+  margin-top: 16px;
+}
+
+@keyframes anim_open {
+  from {
+    width: 0;
+  }
+  to {
+    width: 250px;
+  }
+}
+
+@keyframes anim_close {
+  from {
+    width: 250px;
+  }
+  to {
+    width: 0px;
+  }
+}

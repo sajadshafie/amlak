@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
-
+import Appbutton from "@/common/Appbutton";
 type messagecardType = {
   title: string;
   backgroundColor: string;
@@ -38,7 +38,7 @@ const CustomCard: React.FC<Partial<messagecardType>> = (props) => {
       <Grid
         container
         alignItems="flex-start"
-        sx={{ zIndex: 2, position: "relative", pl: 2 }}
+        sx={{ zIndex: 2, position: "relative" }}
       >
         {/* TEXT AREA */}
         <Grid item xs={12} md={9} sx={{ zIndex: 2 }}>
@@ -65,13 +65,14 @@ const CustomCard: React.FC<Partial<messagecardType>> = (props) => {
               )}
               {props.buttonText && (
                 <Box mt={2}>
-                  <Button
+                  <Appbutton
+                    sx={{ borderRadius: "12px" }}
                     variant="contained"
                     color="primary"
                     onClick={props.buttonAction}
                   >
                     {props.buttonText}
-                  </Button>
+                  </Appbutton>
                 </Box>
               )}
             </Grid>
@@ -83,7 +84,7 @@ const CustomCard: React.FC<Partial<messagecardType>> = (props) => {
           <Grid
             sx={{
               maskImage:
-                "linear-gradient(to left, rgba(0, 0, 0, 1.0) 50%, transparent 100%)",
+                "linear-gradient(to right, rgba(0, 0, 0, 1.0) 0%, transparent 100%)",
               height: props.imageHeight,
             }}
           >

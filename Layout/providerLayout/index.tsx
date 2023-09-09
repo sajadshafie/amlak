@@ -1,5 +1,5 @@
 import { Grid, Typography, useTheme } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -8,10 +8,12 @@ import AppDrawer from "./drawer";
 type providerAppType = {
   username: string;
   children: React.ReactNode;
+  active;
 };
 
 const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
   const theme = useTheme();
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
     <Grid>
       <Grid
@@ -27,6 +29,7 @@ const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
       >
         <MenuIcon
           sx={{ color: theme.palette.primary.yellow300, cursor: "pointer" }}
+          onClick={() => setIsOpen(!isOpen)}
         />
         <Grid display={"flex"} alignItems={"center"}>
           <AppTooltip title="اعلان ها">
@@ -48,8 +51,9 @@ const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
         </Grid>
       </Grid>
       <Grid display={"flex"} id="content">
-        <AppDrawer />
+        <AppDrawer open={isOpen} active={props.active} />
         <Grid
+          width={"100%"}
           sx={{
             p: 2,
           }}

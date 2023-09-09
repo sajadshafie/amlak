@@ -5,9 +5,11 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  useTheme,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 
 type itemTypes = {
   title: string;
@@ -16,32 +18,45 @@ type itemTypes = {
   icon: React.ReactNode;
 };
 
-const ListItemApp: React.FC = () => {
+type propsType = {
+  active: number;
+};
+
+const ListItemApp: React.FC<Partial<propsType>> = (props) => {
+  const theme = useTheme();
   const Items: itemTypes[] = [
     {
-      title: "اگهی",
-      link: "",
+      title: "زمین",
+      link: "/provider/earth",
       id: 1,
-      icon: <MailIcon sx={{color:"white"}} />,
+      icon: <MailIcon sx={{ color: "white" }} />,
     },
     {
-      title: "املاک ",
-      link: "",
+      title: "ویلایی و اپارتمان",
+      link: "/apartment",
       id: 2,
-      icon: <InboxIcon sx={{color:"white"}}/>,
+      icon: <ApartmentIcon sx={{ color: "white" }} />,
     },
     {
       title: "پروفایل",
       link: "",
       id: 3,
-      icon: <InboxIcon sx={{color:"white"}} />,
+      icon: <InboxIcon sx={{ color: "white" }} />,
     },
   ];
   return (
     <>
       {Items.map((v: itemTypes, i: number) => {
         return (
-          <ListItem disablePadding key={v.id}>
+          <ListItem
+            sx={{
+              backgroundColor:
+                props.active == v.id ? theme.palette.primary.yellow300 : null,
+              borderRadius: "12px",
+            }}
+            disablePadding
+            key={v.id}
+          >
             <ListItemButton>
               <ListItemIcon>{v.icon}</ListItemIcon>
               <Typography
