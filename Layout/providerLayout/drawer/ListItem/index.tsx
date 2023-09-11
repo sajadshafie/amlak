@@ -3,7 +3,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -65,11 +64,6 @@ const ListItemApp: React.FC<Partial<propsType>> = (props) => {
               >
                 {v.title}
               </Typography>
-              {/* <ListItemText
-                sx={{ textAlign: "right" }}
-                style={{ color: "white" }}
-                primary={v.title}
-              /> */}
             </ListItemButton>
           </ListItem>
         );

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Pagination } from "@mui/material";
+import { Pagination, useTheme } from "@mui/material";
 //MUI
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +15,8 @@ import { utils as XLSXUtils, writeFile } from "xlsx";
 //Loading
 import CircularProgress from "@mui/material/CircularProgress";
 
-//XLSX Excel file
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 //styles
 import style from "./style.module.scss";
@@ -62,7 +63,7 @@ type propsType = {
 
 const AppTable: React.FC<Partial<propsType>> = (props) => {
   const borderRadius = "12";
-
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -149,23 +150,30 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
         align="right"
       >
         <Grid display={"flex"} alignItems="center">
-          {content.map((item: any, index: number) => {
-            return (
-              <Tooltip title={item.type}>
-                <Grid
-                  style={{ marginLeft: "25px" }}
-                  onClick={() => onAction(item, index, content, data, index)}
-                >
-                  <img
-                    className={style.icon}
-                    src={process.env.PUBLIC_URL + item.icon}
-                    key={index}
-                    alt=""
-                  />
-                </Grid>
-              </Tooltip>
-            );
-          })}
+          <Tooltip title={"Edit"}>
+            <Grid
+              style={{ marginLeft: "25px" }}
+              onClick={() => onAction(null, index, content, data, index)}
+            >
+              <EditOutlinedIcon
+                sx={{
+                  color: theme.palette.primary.yellow300,
+                }}
+              />
+            </Grid>
+          </Tooltip>
+          <Tooltip title={"Delete"}>
+            <Grid
+              style={{ marginLeft: "25px" }}
+              onClick={() => onAction(null, index, content, data, index)}
+            >
+              <DeleteOutlineOutlinedIcon
+                sx={{
+                  color: theme.palette.error.dark,
+                }}
+              />
+            </Grid>
+          </Tooltip>
         </Grid>
       </TableCell>
     );
@@ -206,18 +214,20 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
   };
 
   const handleExcelDownload = () => {
-    const myarr = props.rows
-      .filter((v: any) => v)
-      .map((v: any, i: number) => {
-        if (v) {
-          delete v?.none;
-          delete v?.button;
-          if (v.status) {
-            v.status = v.status.content;
+    const myarr: any[] =
+      props.rows &&
+      props.rows
+        .filter((v: any) => v)
+        .map((v: any, i: number) => {
+          if (v) {
+            delete v?.none;
+            delete v?.button;
+            if (v.status) {
+              v.status = v.status.content;
+            }
+            return v;
           }
-          return v;
-        }
-      });
+        });
 
     const worksheet = XLSXUtils.json_to_sheet(myarr);
     const workbook = XLSXUtils.book_new();

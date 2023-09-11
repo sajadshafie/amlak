@@ -10,30 +10,70 @@ const provider = (): JSX.Element => {
       header2: "۴۵۰۰",
       header3: "تهران - شهرری",
       header4: "۲۳ میلیون",
+      button: [
+        {
+          title: "edit",
+        },
+        {
+          title: "delete",
+        },
+      ],
     },
     {
       header1: "ساخت ساز",
       header2: "۱۵۰۰",
       header3: "",
       header4: "۲۳ میلیون",
+      button: [
+        {
+          title: "edit",
+        },
+        {
+          title: "delete",
+        },
+      ],
     },
     {
       header1: "کشاورزی",
       header2: "۴۵۰۰",
       header3: "تهران - شهرری",
       header4: "۲۳ میلیون",
+      button: [
+        {
+          title: "edit",
+        },
+        {
+          title: "delete",
+        },
+      ],
     },
     {
       header1: "کشاورزی",
       header2: "۴۵۰۰",
       header3: "تهران - شهرری",
       header4: "۲۳ میلیون",
+      button: [
+        {
+          title: "edit",
+        },
+        {
+          title: "delete",
+        },
+      ],
     },
     {
       header1: "کشاورزی",
       header2: "۴۵۰۰",
       header3: "تهران - شهرری",
       header4: "۲۳ میلیون",
+      button: [
+        {
+          title: "edit",
+        },
+        {
+          title: "delete",
+        },
+      ],
     },
   ];
   return (
@@ -47,7 +87,7 @@ const provider = (): JSX.Element => {
         imageHeight="220px"
         buttonText="افزودن ملک جدید"
       />
-      <AppTable rows={data} lables={titles} />
+      <AppTable rows={data} lables={titles} buttonDotted={true} />
     </ProviderLayout>
   );
 };
