@@ -15,7 +15,7 @@ const ImageHover: React.FC<Partial<types>> = (props) => {
       sx={{ background: "white", p: 2, borderRadius: "20px", direction: "rtl" }}
     >
       <Grid height={"200px"} className={style.container} mb={2}>
-        <Appimage alt="/" src={props.image} />
+        <Appimage alt="/" src={props.image} style={{ borderRadius: "12px" }} />
         <Grid className={style.show_content}>
           <Typography variant="h4" sx={{ color: "white" }} mb={2}>
             {props.label}

@@ -19,6 +19,7 @@ export default function themePalette(theme) {
       yellow: theme.colors.yellow100,
       yellow200: theme.colors.yellow200,
       yellow300: theme.colors.yellow300,
+      footer_bg: theme.colors.footer_bg,
     },
     secondary: {
       light: theme.colors?.secondaryLight,

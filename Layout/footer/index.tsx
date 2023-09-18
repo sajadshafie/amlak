@@ -2,29 +2,27 @@ import React from "react";
 import { Grid, Typography, useTheme } from "@mui/material";
 import Appimage from "@/common/Appimage";
 import { Footeritem } from "./items";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 type typeItem = {
   title: string;
   children: string[];
 };
 
-type iconsType = {
-  image: string;
-  width: string;
-};
-
 const Footer: React.FC = () => {
   const theme = useTheme();
-  const icons: iconsType[] = [
-    { image: "/images/footer/telegram.png", width: "50px" },
-    { image: "/images/footer/instagram.png", width: "35px" },
-    { image: "/images/footer/whatsapp.png", width: "45px" },
+  const icons: React.ReactNode[] = [
+    <TelegramIcon sx={{ fontSize: 30 }} />,
+    <InstagramIcon sx={{ fontSize: 30 }} />,
+    <WhatsAppIcon sx={{ fontSize: 30 }} />,
   ];
 
   return (
     <Grid
       mt={20}
       sx={{
-        backgroundColor: `${theme.palette.primary.main}`,
+        backgroundColor: theme.palette.primary.footer_bg,
         position: "relative",
         pb: "200px",
       }}
@@ -40,17 +38,22 @@ const Footer: React.FC = () => {
       >
         {Footeritem.map((v: typeItem, i: number) => {
           return (
-            <Grid>
-              <Typography variant="h4" mb={4} sx={{ color: "white" }}>
+            <Grid key={i}>
+              <Typography variant="h3" mb={4}>
                 {v.title}
               </Typography>
               {v.children.map((item: string, index: number) => {
                 return (
                   <Typography
-                    variant="h6"
+                    variant="body2"
                     mb={1}
-                    sx={{ color: "white", cursor: "pointer" }}
-                    className="text_underline"
+                    sx={{
+                      cursor: "pointer",
+                      transition: "0.2s",
+                      ":hover": {
+                        color: theme.palette.primary.yellow300,
+                      },
+                    }}
                   >
                     {item}
                   </Typography>
@@ -60,22 +63,26 @@ const Footer: React.FC = () => {
           );
         })}
         <Grid>
-          <Typography variant="h4" mb={4} sx={{ color: "white" }}>
+          <Typography variant="h4" mb={4}>
             راه ها ارتباطی با ما
           </Typography>
           <Grid display={"flex"} alignItems={"center"}>
-            {icons.map((v: iconsType, i: number) => {
+            {icons.map((v: React.ReactNode, i: number) => {
               return (
                 <Grid
                   sx={{
                     cursor: "pointer",
-                    width: v.width,
-                    height: "40px",
                     ml: 1,
+                    ":hover": {
+                      color: theme.palette.primary.yellow300,
+                    },
+                    transition: "0.2s",
+                    height: "100%",
+                    color: theme.palette.grey[700],
                   }}
                   key={i}
                 >
-                  <Appimage src={v.image} />
+                  {v}
                 </Grid>
               );
             })}

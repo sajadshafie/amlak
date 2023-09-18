@@ -50,3 +50,18 @@ body {
   right: 0 !important;
   
 } */
+.slick-dots {
+  bottom: -35px !important;
+}
+/* Change the size of the default dots */
+.slick-dots li button:before {
+  font-size: 10px; /* Adjust the font size to change the dot size */
+  color: white !important;
+}
+
+/* Change the size of the active dot */
+.slick-dots li.slick-active button:before {
+  color: white !important;
+  opacity: 1 !important;
+  font-size: 12px; /* Adjust the font size to change the active dot size */
+}

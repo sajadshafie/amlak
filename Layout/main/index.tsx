@@ -11,9 +11,9 @@ type Props = {
 
 const Main: React.FC<Partial<Props>> = (props) => {
   return (
-    <Grid>
+    <Grid sx={{ backgroundColor: "white" }}>
       <Header active={props.active} />
-
+    
       <Grid
         sx={{
           direction: "rtl",

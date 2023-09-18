@@ -7,11 +7,13 @@ import { Grid, Typography, useTheme } from "@mui/material";
 import ImageHover from "@/components/Home/imageHover";
 import Product from "@/components/Home/product";
 import Whymehr from "@/components/Home/Whymehr";
-
+import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
+import DomainOutlinedIcon from "@mui/icons-material/DomainOutlined";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 type iconBox = {
   title: string;
   description: string;
-  icon: string;
+  icon: React.ReactNode;
 };
 
 const Home = (): JSX.Element => {
@@ -60,19 +62,19 @@ const Home = (): JSX.Element => {
       title: "خرید فروش انلاین ملک",
       description:
         "ی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام ",
-      icon: "/images/support.png",
+      icon: <AddHomeWorkOutlinedIcon sx={{ fontSize: 36 }} />,
     },
     {
       title: "مشاوره انلاین",
       description:
         "ی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام ",
-      icon: "/images/support.png",
+      icon: <DomainOutlinedIcon sx={{ fontSize: 36 }} />,
     },
     {
       title: "خدمات پس از فروش",
       description:
         "ی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام ",
-      icon: "/images/support.png",
+      icon: <AdminPanelSettingsOutlinedIcon sx={{ fontSize: 36 }} />,
     },
   ];
 

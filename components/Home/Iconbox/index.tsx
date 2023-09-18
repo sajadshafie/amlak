@@ -4,7 +4,7 @@ import { Grid, Typography, useTheme } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Applink from "@/common/Applink";
 type App = {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 };
@@ -18,10 +18,32 @@ const Iconbox: React.FC<Partial<App>> = (props) => {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
+        backgroundColor: theme.palette.primary.footer_bg,
+        position: "relative",
+        p: 2,
+        borderRadius: "30px",
       }}
     >
-      <Grid height={"50px"} width={"50px"}>
-        <Appimage alt="/" src={props.icon} />
+      <Grid
+        height={"50px"}
+        width={"50px"}
+        sx={{
+          position: "absolute",
+          backgroundColor: "white",
+          borderColor: theme.palette.primary.yellow300,
+          borderWidth: "1px",
+          borderStyle: "solid",
+          top: "-40px",
+          borderRadius: "100%",
+          width: "60px",
+          height: "60px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: theme.palette.primary.yellow300,
+        }}
+      >
+        {props.icon}
       </Grid>
       <Typography variant="h4" my={2}>
         {props.title}

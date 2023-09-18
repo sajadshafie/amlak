@@ -40,6 +40,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
         px: { xs: 2, md: 4 },
         maxWidth: { xs: "100%", xl: "1536px" },
         margin: "0 auto",
+        py: 3,
       }}
       justifyContent={"space-between"}
       alignItems={"center"}
