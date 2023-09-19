@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
       <Grid
         display={"flex"}
         sx={{
-          px: { xs: 5, sm: 7, md: 9, xl: 11 },
-          py: { xs: 5, sm: 7, md: 9, xl: 11 },
+          px: { xs: 2, sm: 4, md: 4, xl: 4 },
+          py: { xs: 4 },
           width: { xs: "100%", sm: "70%", md: "60%" },
         }}
         justifyContent={"space-between"}

@@ -10,12 +10,14 @@ type Props = {
   fill: boolean;
   quality: number;
   style: React.CSSProperties;
+  className: string;
 };
 
 const Appimage: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid position={"relative"} sx={{ width: "100%", height: "100%" }}>
       <Image
+        className={props.className}
         style={props.style}
         src={props.src}
         width={props.width}

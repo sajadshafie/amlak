@@ -65,3 +65,6 @@ body {
   opacity: 1 !important;
   font-size: 12px; /* Adjust the font size to change the active dot size */
 }
+.border_radius12 {
+  border-radius: 12px;
+}

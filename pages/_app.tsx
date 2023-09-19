@@ -7,10 +7,13 @@ import themes from "../themes/index";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import contextType from "@/types/contenxt";
-const context = createContext<any>(null);
+import { context } from "@/context";
 export default function App({ Component, pageProps }: AppProps) {
   const [state, setState] = useState<contextType>({
     save_product: false,
+    maxWidth: { xs: "100%", xl: "1536px" },
+    px: { xs: 2, md: 4 },
+    margin: "200px auto 0 auto",
   });
   return (
     <>
