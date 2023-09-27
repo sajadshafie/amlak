@@ -8,6 +8,11 @@ import Product from "@/components/Home/product";
 import Whymehr from "@/components/Home/Whymehr";
 import { CityItems, iconbox_items } from "@/components/Home/Icon_city_items";
 import { context } from "@/context";
+type iconBox = {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+};
 const Home = (): JSX.Element => {
   const theme = useTheme();
   const { state } = useContext(context);
@@ -40,11 +45,8 @@ const Home = (): JSX.Element => {
           </Typography>
           <Grid
             sx={{
-              maxWidth: {
-                xs: "100%",
-                lg: "1536px",
-                margin: "60px auto 0 auto",
-              },
+              maxWidth: state.maxWidth,
+              margin: '100px auto',
             }}
           >
             <Carousel
@@ -70,7 +72,8 @@ const Home = (): JSX.Element => {
           display={"flex"}
           justifyContent={"center"}
           sx={{
-            maxWidth: { xs: "100%", lg: "1536px", margin: "200px auto 0 auto" },
+            maxWidth: state.maxWidth,
+            margin: state.margin,
           }}
         >
           <Grid
@@ -83,7 +86,7 @@ const Home = (): JSX.Element => {
           >
             {iconbox_items.map((v: iconBox, i: number) => {
               return (
-                <Grid item md={3.8} sm={12}>
+                <Grid key={i} item md={3.8} sm={12}>
                   <Iconbox
                     title={v.title}
                     icon={v.icon}

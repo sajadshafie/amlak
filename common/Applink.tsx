@@ -5,15 +5,20 @@ import style from "./style.module.scss";
 
 type Appprops = {
   link: string;
-  text: string | React.ReactNode;
+  children: string | React.ReactNode;
+  title: string;
 };
 
 const Applink: React.FC<Partial<Appprops>> = (props) => {
   const theme = useTheme();
 
   return (
-    <Link href={props.link} className={style.link}>
-      {props.text}
+    <Link
+      title={props.title}
+      href={props.link ? props.link : "/"}
+      className={style.link}
+    >
+      {props.children}
     </Link>
   );
 };

@@ -57,7 +57,7 @@ const Iconbox: React.FC<Partial<App>> = (props) => {
         alignItems={"center"}
         sx={{ cursor: "pointer" }}
       >
-        <Applink link="/" text="مشاهده بیشتر" />
+        <Applink link="/">{"مشاهده بیشتر"}</Applink>
 
         <KeyboardBackspaceIcon
           sx={{ color: theme.palette.primary.yellow, fontSize: 18, mr: 1 }}

@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
       <Grid
         display={"flex"}
         sx={{
-          px: { xs: 2, sm: 4, md: 4, xl: 4 },
-          py: { xs: 4 },
+          px: { xs: 5, sm: 7, md: 9, xl: 11 },
+          py: { xs: 5, sm: 7, md: 9, xl: 11 },
           width: { xs: "100%", sm: "70%", md: "60%" },
         }}
         justifyContent={"space-between"}
@@ -39,24 +39,26 @@ const Footer: React.FC = () => {
         {Footeritem.map((v: typeItem, i: number) => {
           return (
             <Grid key={i}>
-              <Typography variant="h3" mb={4}>
+              <Typography variant="h4" mb={4}>
                 {v.title}
               </Typography>
               {v.children.map((item: string, index: number) => {
                 return (
-                  <Typography
-                    variant="body2"
-                    mb={1}
-                    sx={{
-                      cursor: "pointer",
-                      transition: "0.2s",
-                      ":hover": {
-                        color: theme.palette.primary.yellow300,
-                      },
-                    }}
-                  >
-                    {item}
-                  </Typography>
+                  <React.Fragment key={index}>
+                    <Typography
+                      variant="body2"
+                      mb={1}
+                      sx={{
+                        cursor: "pointer",
+                        transition: "0.2s",
+                        ":hover": {
+                          color: theme.palette.primary.yellow300,
+                        },
+                      }}
+                    >
+                      {item}
+                    </Typography>
+                  </React.Fragment>
                 );
               })}
             </Grid>

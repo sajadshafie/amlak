@@ -148,10 +148,9 @@ const Registerform: React.FC<Partial<propsType>> = (props) => {
         <Appbutton type="submit" variant="contained">
           ثبت و ارسال کد
         </Appbutton>
-        <Applink
-          link="/forgotpassword"
-          text="رمز عبور خود را فراموش کرده اید؟"
-        />
+        <Applink link="/forgotpassword">
+          {"رمز عبور خود را فراموش کرده اید؟"}
+        </Applink>
       </Grid>
     </ValidatorForm>
   );

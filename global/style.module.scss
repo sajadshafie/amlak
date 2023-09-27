@@ -1,0 +1,14 @@
+@import "../styles/pallete.module.scss";
+
+.success {
+  color: $successDark;
+  background-color: $successLight;
+}
+.error {
+  color: $errorDark;
+  background-color: $errorLight;
+}
+.disabled {
+  color: $grey700;
+  background-color: $grey300;
+}

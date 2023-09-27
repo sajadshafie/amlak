@@ -4,3 +4,17 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+.cover_diactive {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.pos_rel {
+  position: relative !important;
+}

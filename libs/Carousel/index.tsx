@@ -1,63 +1,71 @@
-import React, { ReactNode, useRef } from "react";
-import Slider from "react-slick";
+import React, { ReactNode, useRef, ForwardedRef } from "react";
+import Slider, { SliderRef } from "react-slick";
 import style from "./style.module.scss";
 import Arrow from "./Arrow";
+import carouselTypes from "@/types/carouselType";
+
 interface Props {
-  data: ReactNode[];
+  data: any;
   dots: boolean;
   infinite: boolean;
   speed: number;
   slidesToShow: number;
   slidesToScroll: number;
+  height: string;
+  autoPlay: boolean;
+  initialSlide: number;
+  onClickItem: Function;
+  classNameItem: any;
+  activeIndex: number;
+  isActiveMode: boolean;
+  onClickArrow: (e: string) => void;
+  haveArrow: boolean;
 }
 
-const Carousel: React.FC<Partial<Props>> = (props) => {
-  const ref = useRef<any>(null);
+const Carousel: React.ForwardRefRenderFunction<SliderRef, Partial<Props>> = (
+  props,
+  ref
+) => {
+  const sliderRef = useRef<SliderRef>(null);
   const onClickSlide = (e: string) => {
-    e == "prev" ? ref.current.slickPrev() : ref.current.slickNext();
+    props.onClickArrow && props.onClickArrow(e);
+    e == "prev"
+      ? sliderRef.current?.slickPrev()
+      : sliderRef.current?.slickNext();
   };
-  const renderCustomDots = (dots: any) => {
-    return (
-      <ul style={{ display: "flex", justifyContent: "center" }}>
-        {dots.map((dot: any, index: number) => (
-          <li
-            key={index}
-            style={{
-              margin: "0 5px",
-              listStyleType: "none",
-              width: "10px", // Adjust the width of the dot
-              height: "10px", // Adjust the height of the dot
-              borderRadius: "50%", // Make the dot circular
-              background: "red", // Change the background color of the dot
-            }}
-          >
-            {dot}
-          </li>
-        ))}
-      </ul>
-    );
-  };
+
   const settings = {
     dots: props.dots,
     infinite: props.infinite,
     speed: props.speed,
     slidesToShow: props.slidesToShow,
     slidesToScroll: props.slidesToScroll,
-    autoplay: true,
+    autoplay: props.autoPlay,
     autoplaySpeed: 5000,
-    prevArrow: <Arrow handleClick={(e) => onClickSlide(e)} type={"prev"} />,
-    nextArrow: <Arrow handleClick={(e) => onClickSlide(e)} type={"next"} />,
+    prevArrow: props.haveArrow && (
+      <Arrow handleClick={(e) => onClickSlide(e)} type={"prev"} />
+    ),
+    nextArrow: props.haveArrow && (
+      <Arrow handleClick={(e) => onClickSlide(e)} type={"next"} />
+    ),
+    initialSlide: props.initialSlide,
   };
 
   return (
-    <Slider {...settings} ref={ref}>
-      {props.data?.map((v: ReactNode, index: number) => {
+    <Slider {...settings} ref={ref || sliderRef}>
+      {props.data?.map((v: any, index: number) => {
         return (
           <div
-            className={props.slidesToShow !== 1 ? style.container_item : ""}
+            onClick={() => props.onClickItem && props.onClickItem(v, index)}
+            className={`${
+              props.slidesToShow !== 1 ? style.container_item : ""
+            } ${props.classNameItem} ${style.pos_rel}`}
             key={index}
           >
-            {v}
+            {props.isActiveMode && props.activeIndex != index && (
+              <div className={style.cover_diactive}></div>
+            )}
+            {v.element}
           </div>
         );
       })}
@@ -65,4 +73,4 @@ const Carousel: React.FC<Partial<Props>> = (props) => {
   );
 };
 
-export default Carousel;
+export default React.forwardRef<SliderRef, Partial<Props>>(Carousel);

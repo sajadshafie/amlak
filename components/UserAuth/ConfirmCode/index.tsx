@@ -53,10 +53,9 @@ const ConfirmCode: React.FC<Partial<propsType>> = (props) => {
             ثبت نام
           </Appbutton>
         </Grid>
-        <Applink
-          link="/forgotpassword"
-          text="رمز عبور خود را فراموش کرده اید؟"
-        />
+        <Applink link="/forgotpassword">
+          {"رمز عبور خود را فراموش کرده اید؟"}
+        </Applink>
       </Grid>
     </ValidatorForm>
   );

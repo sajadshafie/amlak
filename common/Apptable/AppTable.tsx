@@ -22,7 +22,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import style from "./style.module.scss";
 
 //Status fild with Style
-// import StatusHandler from 'components/GlobalRenders/StatusHandler';
+import { Global } from "@/global";
 
 //Box Filter  table
 import FilterTable from "./Table/FillterTable";
@@ -86,6 +86,8 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
   //Class Render For Status
   const classRender = () => {
     let res;
+    // style[`${props.typeColor}btn_txt`]
+    // _btn_txt
     switch (props.typeColor) {
       case "success":
         res = style.success_btn_txt;
@@ -196,7 +198,11 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
         );
       } else {
         if (getKeyByValue(v, v[x]) == "status") {
-          res.push(<TableCell rowSpan={1} align="right"></TableCell>);
+          res.push(
+            <TableCell rowSpan={1} align="right">
+              {Global.statusHandler(v[x].type, v[x].content)}
+            </TableCell>
+          );
         } else if (getKeyByValue(v, v[x]) == "none") {
         } else {
           res.push(
@@ -271,7 +277,11 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
                       key={i}
                       align={v.toLowerCase() == "actions" ? "center" : "right"}
                       colSpan={v.toLowerCase() == "actions" ? 2 : 1}
-                      sx={{ borderBottom: "none" }}
+                      sx={{
+                        borderBottom: "none",
+                        fontWeight: "600",
+                        color: "black",
+                      }}
                     >
                       {v}
                     </TableCell>

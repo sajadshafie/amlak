@@ -39,6 +39,7 @@ export default function themeTypography(theme) {
       fontWeight: 600,
     },
     h5: {
+      lineHeight: 1.5,
       fontSize: "0.875rem",
       color: theme.heading,
       fontWeight: 500,

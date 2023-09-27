@@ -20,7 +20,7 @@ const Product: React.FC = () => {
       <Grid container>
         {product_item.map((v: productType, i: number) => {
           return (
-            <Grid pl={2} pb={2} item md={3} sm={6} xs={12}>
+            <Grid key={i} pl={2} pb={2} item md={4} sm={6} xs={12}>
               <Carditem {...v} />
             </Grid>
           );

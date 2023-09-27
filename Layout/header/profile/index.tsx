@@ -1,7 +1,5 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import Link from "next/link";
-import Applink from "@/common/Applink";
 import Applink2 from "@/common/Applink2";
 const Profile: React.FC = () => {
   return (

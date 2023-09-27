@@ -3,7 +3,6 @@ import { Grid, Typography } from "@mui/material";
 import React, { useRef, useState, ChangeEvent } from "react";
 import AppTextValidator from "@/libs/AppTextvalidator";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import Applink from "@/common/Applink";
 import { authType } from "@/types/authType";
 import FileUpload from "@/common/Appupload";
 

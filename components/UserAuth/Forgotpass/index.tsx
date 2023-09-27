@@ -3,7 +3,7 @@ import { Grid, Typography } from "@mui/material";
 import React, { useRef, useState, ChangeEvent } from "react";
 import AppTextValidator from "@/libs/AppTextvalidator";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import Applink from "@/common/Applink";
+
 type formType = {
   phone_number: string;
 };

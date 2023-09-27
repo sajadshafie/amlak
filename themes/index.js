@@ -30,7 +30,7 @@ export const theme = (customization) => {
     textLight: color.secondaryLight,
     menuSelected: color.secondaryLight,
     menuSelectedBack: color.selectedColor,
-    divider: color.grey700,
+    divider: color.grey300,
     menuColor: color.menuColor,
     grey300: color.grey300,
     customization,

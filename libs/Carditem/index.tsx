@@ -6,9 +6,10 @@ import Appbutton from "@/common/Appbutton";
 import style from "./style.module.scss";
 import Likedbox from "./Likedbox";
 import AppTooltip from "@/libs/Tooltip";
+import { useRouter } from "next/router";
 const Carditem: React.FC<Partial<productType>> = (props) => {
   const hanldeLike = () => {};
-
+  const router = useRouter();
   return (
     <Grid
       sx={{
@@ -23,8 +24,8 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
       <Grid
         sx={{
           position: "absolute",
-          top: "10px",
-          right: "5px",
+          top: "0px",
+          right: "0px",
           zIndex: 500,
         }}
       >
@@ -32,7 +33,7 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
           <Likedbox hanldeLike={hanldeLike} />
         </AppTooltip>
       </Grid>
-      <Grid height={"200px"}>
+      <Grid height={"250px"}>
         <Appimage
           style={{ borderRadius: "12px 12px 0 0 " }}
           src={props.image}
@@ -40,28 +41,36 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
         />
       </Grid>
       <Grid p={2}>
-        <Grid display={"flex"} justifyContent={"space-between"}>
+        <Grid display={"flex"} justifyContent={"space-between"} mb={1}>
           <Typography variant="h5" mb={1}>
             {props.title}
           </Typography>
           <Typography variant="h5number">{props.meter}</Typography>
         </Grid>
-        <Grid display={"flex"} justifyContent={"space-between"} mb={1}>
+        <Grid display={"flex"} justifyContent={"space-between"} mb={2}>
           <Typography variant="caption"> موقیت مکانی {props.city}</Typography>
           <Typography variant="caption">{props.type}</Typography>
         </Grid>
-        <Typography variant="h5number" mb={2}>
-          {Number(props.price).toLocaleString("fi-FI")} تومان
-        </Typography>
-        <Appbutton
-          disabled={props.is_selled}
-          fullWidth
-          textVariant="h5"
-          sx={{ borderRadius: 30, mt: 1 }}
-          variant="outlined"
+        <Grid mb={2}>
+          <Typography variant="h5number">
+            {Number(props.price).toLocaleString("fi-FI")} تومان
+          </Typography>
+        </Grid>
+        <Grid
+          container
+          sx={{ width: { xs: "100%", sm: "50%" }, margin: "0 auto" }}
         >
-          {props.is_selled ? "درحال معامله " : "مشاهده جزییات"}
-        </Appbutton>
+          <Appbutton
+            onClick={() => router.push("/product/test")}
+            disabled={props.is_selled}
+            fullWidth
+            textVariant="h5"
+            sx={{ borderRadius: 30, mt: 1 }}
+            variant="outlined"
+          >
+            {props.is_selled ? "درحال معامله " : "مشاهده جزییات"}
+          </Appbutton>
+        </Grid>
       </Grid>
     </Grid>
   );

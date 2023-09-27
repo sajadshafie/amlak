@@ -3,10 +3,10 @@ import { Grid } from "@mui/material";
 import Appimage from "@/common/Appimage";
 import carouselTypes from "@/types/carouselType";
 
-const productImage: carouselTypes[] = [
+const productImageSub: carouselTypes[] = [
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house1.jpeg"
           fill
@@ -18,7 +18,7 @@ const productImage: carouselTypes[] = [
   },
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house2.jpeg"
           fill
@@ -30,7 +30,7 @@ const productImage: carouselTypes[] = [
   },
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house3.jpeg"
           fill
@@ -42,7 +42,7 @@ const productImage: carouselTypes[] = [
   },
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house4.jpeg"
           fill
@@ -54,7 +54,7 @@ const productImage: carouselTypes[] = [
   },
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house5.jpeg"
           fill
@@ -66,7 +66,7 @@ const productImage: carouselTypes[] = [
   },
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house6.jpeg"
           fill
@@ -78,7 +78,7 @@ const productImage: carouselTypes[] = [
   },
   {
     element: (
-      <Grid height={"400px"}>
+      <Grid height={"100px"}>
         <Appimage
           src="/images/house/house7.jpeg"
           fill
@@ -90,4 +90,4 @@ const productImage: carouselTypes[] = [
   },
 ];
 
-export { productImage };
+export { productImageSub };

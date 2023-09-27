@@ -53,8 +53,9 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
             </Typography>
           )}
           <Typography mt={4} variant="h6">
-            ورود شما به معنای پذیرش <Applink text="شرایط  تالار ملک" link="/" />{" "}
-            و <Applink text="قوانین و حریم خصوصی" link="/" /> است
+            ورود شما به معنای پذیرش{" "}
+            {<Applink link="/">{"شرایط  تالار ملک"}</Applink>} و{" "}
+            <Applink link="/">{"قوانین و حریم خصوصی"}</Applink> است
           </Typography>
         </Grid>
 

@@ -63,10 +63,9 @@ const Loginform: React.FC = () => {
         <Appbutton type="submit" variant="contained">
           ورود
         </Appbutton>
-        <Applink
-          link="/forgotpassword"
-          text="رمز عبور خود را فراموش کرده اید؟"
-        />
+        <Applink link="/forgotpassword">
+          {"رمز عبور خود را فراموش کرده اید؟"}
+        </Applink>
       </Grid>
     </ValidatorForm>
   );

@@ -54,22 +54,19 @@ const Header: React.FC<Partial<Props>> = (props) => {
               className={style.item_hover}
               sx={{ cursor: "pointer" }}
             >
-              <Applink
-                link={v.link}
-                text={
-                  <>
-                    <Typography
-                      className={`${
-                        props.active == v.id && "text_active_main"
-                      } text_transition_main `}
-                      variant="h5"
-                      key={i}
-                    >
-                      {v.title}
-                    </Typography>
-                  </>
-                }
-              />
+              <Applink link={v.link}>
+                <>
+                  <Typography
+                    className={`${
+                      props.active == v.id && "text_active_main"
+                    } text_transition_main `}
+                    variant="h5"
+                    key={i}
+                  >
+                    {v.title}
+                  </Typography>
+                </>
+              </Applink>
 
               <Typography
                 mt={0.5}
