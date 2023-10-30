@@ -38,7 +38,9 @@ const Appbutton: React.FC<Partial<Props>> = (props) => {
       >
         {props.children}
       </Typography>
-      {props.loading && <CircularProgress size={26} />}
+      {props.loading && (
+        <CircularProgress size={18} sx={{ color: "white", mr: 1 }} />
+      )}
     </Button>
   );
 };

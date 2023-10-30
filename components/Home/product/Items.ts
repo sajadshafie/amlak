@@ -211,18 +211,4 @@ export const product_item: productType[] = [
     liked: false,
     is_selled: false,
   },
-  {
-    title: "واحد تجاری طبقه اول",
-    city: "تهران",
-    meter: "200 متر",
-    image: "/images/product/product1.jpeg",
-    description:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله ",
-    type: "ملک تجاری",
-    id: 16,
-    introduction_code: 21235,
-    price: "50000000",
-    liked: false,
-    is_selled: true,
-  },
 ];

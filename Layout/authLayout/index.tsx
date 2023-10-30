@@ -49,7 +49,7 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
           {props.text_is_register && (
             <Typography mt={4} variant="h6">
               {props.text_sub_register}{" "}
-              <Applink text={props.text_is_register} link={props.link} />
+              <Applink link={props.link}>{props.text_is_register} </Applink>
             </Typography>
           )}
           <Typography mt={4} variant="h6">

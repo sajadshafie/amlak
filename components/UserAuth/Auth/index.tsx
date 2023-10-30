@@ -7,7 +7,7 @@ import { authType } from "@/types/authType";
 import FileUpload from "@/common/Appupload";
 
 type propsType = {
-  onSubmit: (form: formType) => void;
+  onSubmit: (form: any) => void;
 };
 
 const AuthForm: React.FC<Partial<propsType>> = (props) => {

@@ -58,7 +58,7 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
         </Grid>
         <Grid
           container
-          sx={{ width: { xs: "100%", sm: "50%" }, margin: "0 auto" }}
+          sx={{ width: { xs: "100%", sm: "80%", md: "60%" }, margin: "0 auto" }}
         >
           <Appbutton
             onClick={() => router.push("/product/test")}

@@ -1,6 +1,7 @@
 import style from "./style.module.scss";
 import { Grid } from "@mui/material";
 export const step_auth_register = ["ثبت نام", "کد تایید", "اهراز هویت"];
+
 export const Global = {
   statusHandler: (type: string, content: string) => {
     return (

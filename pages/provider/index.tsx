@@ -1,7 +1,10 @@
 import ProviderLayout from "@/Layout/providerLayout";
-import React from "react";
+import React, { useState } from "react";
 import AppTable from "@/common/Apptable/AppTable";
 import MessageCard from "@/libs/Messagecard";
+import AppModal from "@/common/AppModal";
+import FormAdd from "@/components/provider/Advertising/form";
+import { adviserType } from "@/types/addvertise";
 const provider = (): JSX.Element => {
   const titles = [
     "نوع زمین",
@@ -103,8 +106,40 @@ const provider = (): JSX.Element => {
       ],
     },
   ];
+  const [form, setForm] = useState<adviserType>({
+    location: "",
+    type: "",
+    status: "",
+    meter: "",
+    price_meter: "",
+    total_price: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const onAddition = () => {
+    setIsOpen(true);
+  };
+  const onChangeForm = (val: string, type: string) => {
+    setForm({
+      ...form,
+      [type]: val,
+    });
+  };
+  const onSubmitForm = () => {
+    setLoading(true);
+  };
   return (
     <ProviderLayout active={1}>
+      <FormAdd
+        onChangeForm={onChangeForm}
+        submitText="ثبت"
+        cancelText="انصراف"
+        form={form}
+        open={isOpen}
+        onSubmit={onSubmitForm}
+        onClose={() => setIsOpen(false)}
+        loading={loading}
+      />
       <MessageCard
         title="آگهی ها"
         backgroundColor2="#8ecae6"
@@ -113,6 +148,7 @@ const provider = (): JSX.Element => {
         imageSrc="/images/city.jpeg"
         imageHeight="245px"
         buttonText="افزودن ملک جدید"
+        buttonAction={onAddition}
       />
       <AppTable rows={data} lables={titles} buttonDotted={true} />
     </ProviderLayout>

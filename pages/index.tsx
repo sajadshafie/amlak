@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
           <Grid
             sx={{
               maxWidth: state.maxWidth,
-              margin: '100px auto',
+              margin: "50px auto",
             }}
           >
             <Carousel

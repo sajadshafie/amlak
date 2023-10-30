@@ -8,6 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import contextType from "@/types/contenxt";
 import { context } from "@/context";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+
 export default function App({ Component, pageProps }: AppProps) {
   const [state, setState] = useState<contextType>({
     save_product: false,
@@ -26,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <context.Provider value={{ state, setState }}>
         <ThemeProvider theme={themes}>
           <Component {...pageProps} />
+          <ToastContainer />
         </ThemeProvider>
       </context.Provider>
     </>
