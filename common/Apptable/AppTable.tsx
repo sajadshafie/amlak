@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Pagination, useTheme } from "@mui/material";
+import { Pagination, useTheme, IconButton } from "@mui/material";
 //MUI
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,31 +8,30 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
 import Tooltip from "@mui/material/Tooltip";
 import { Grid, Typography, Button } from "@mui/material";
 import { utils as XLSXUtils, writeFile } from "xlsx";
 //Loading
-import CircularProgress from "@mui/material/CircularProgress";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 //styles
 import style from "./style.module.scss";
 
 //Status fild with Style
-import { Global } from "@/global";
+import Global from "@/global";
 
 //Box Filter  table
 import FilterTable from "./Table/FillterTable";
+import Process from "./process";
 
 type propsType = {
   rows: object[];
   lables: string[];
   typeColor: string;
   widthBtn: string;
-  isLoading: boolean;
+  isLoading: string;
   handleAction: (
     item: any,
     ind: number,
@@ -46,33 +45,13 @@ type propsType = {
   isPaginate: boolean;
 };
 
-// {
-//   rows,
-//   lables,
-//   typeColor = "primary",
-//   widthBtn = "170px",
-//   filters,
-//   buttonDotted,
-//   handleAction,
-
-//   isLoading,
-//   onPagination,
-//   totalPage,
-//   isPaginat,
-// }
-
 const AppTable: React.FC<Partial<propsType>> = (props) => {
   const borderRadius = "12";
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
-  //CallBack Function Show Detail Table
   const onAction = (
     item: any,
     ind: number,
@@ -104,7 +83,6 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
     }
     return res;
   };
-
   //Render Text Button
   const buttonRender = (content: any, data: any, index: number) => {
     return (
@@ -152,28 +130,48 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
         align="right"
       >
         <Grid display={"flex"} alignItems="center">
-          <Tooltip title={"Edit"}>
+          {
+            <Tooltip title={"مشاهده جزییات"}>
+              <Grid
+                style={{ marginLeft: "25px" }}
+                onClick={() => onAction("view", index, content, data, index)}
+              >
+                <IconButton>
+                  <RemoveRedEyeIcon
+                    sx={{
+                      color: theme.palette.info.main,
+                    }}
+                  />
+                </IconButton>
+              </Grid>
+            </Tooltip>
+          }
+          <Tooltip title={"تغییر"}>
             <Grid
               style={{ marginLeft: "25px" }}
-              onClick={() => onAction(null, index, content, data, index)}
+              onClick={() => onAction("edit", index, content, data, index)}
             >
-              <EditOutlinedIcon
-                sx={{
-                  color: theme.palette.primary.yellow300,
-                }}
-              />
+              <IconButton>
+                <EditOutlinedIcon
+                  sx={{
+                    color: theme.palette.primary.yellow300,
+                  }}
+                />
+              </IconButton>
             </Grid>
           </Tooltip>
-          <Tooltip title={"Delete"}>
+          <Tooltip title={"حذف"}>
             <Grid
               style={{ marginLeft: "25px" }}
-              onClick={() => onAction(null, index, content, data, index)}
+              onClick={() => onAction("delete", index, content, data, index)}
             >
-              <DeleteOutlineOutlinedIcon
-                sx={{
-                  color: theme.palette.error.dark,
-                }}
-              />
+              <IconButton>
+                <DeleteOutlineOutlinedIcon
+                  sx={{
+                    color: theme.palette.error.dark,
+                  }}
+                />
+              </IconButton>
             </Grid>
           </Tooltip>
         </Grid>
@@ -207,7 +205,9 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
         } else {
           res.push(
             <TableCell key={i} rowSpan={1} align="right">
-              {v[x]}
+              <Typography sx={{ fontWeight: "400" }} variant="h5number">
+                {v[x]}
+              </Typography>
             </TableCell>
           );
         }
@@ -290,10 +290,8 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
             </TableRow>
           </TableHead>
 
-          {props.isLoading ? (
-            <Grid item sx={{ mt: 2 }}>
-              <CircularProgress />
-            </Grid>
+          {props.isLoading !== "data" ? (
+            <Process loading={props.isLoading} />
           ) : (
             <TableBody>
               {props.rows &&
@@ -326,25 +324,27 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
           )}
         </Grid>
 
-        <Grid
-          item
-          xs={10}
-          display="flex"
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="center"
-          spacing={2}
-        >
-          {/* Excel download file */}
-          <Button
-            sx={{ borderRadius: "12px" }}
-            variant="outlined"
-            color="primary"
-            onClick={handleExcelDownload}
+        {props.isLoading == "data" && (
+          <Grid
+            item
+            xs={10}
+            display="flex"
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            spacing={2}
           >
-            دانلود اکسل
-          </Button>
-        </Grid>
+            {/* Excel download file */}
+            <Button
+              sx={{ borderRadius: "12px" }}
+              variant="outlined"
+              color="primary"
+              onClick={handleExcelDownload}
+            >
+              دانلود اکسل
+            </Button>
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );

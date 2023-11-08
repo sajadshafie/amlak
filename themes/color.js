@@ -18,6 +18,7 @@ export default function ColorTypography() {
     menuColor: color.menuColor,
     grey300: color.grey300,
     yellow100: color.yellow100,
+    blueMain: color.blueMain,
   };
 
   return themeOption;

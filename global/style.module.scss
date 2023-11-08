@@ -3,12 +3,25 @@
 .success {
   color: $successDark;
   background-color: $successLight;
+  font-size: 11px;
 }
 .error {
   color: $errorDark;
   background-color: $errorLight;
+  font-size: 11px;
 }
-.disabled {
+.pendding {
   color: $grey700;
   background-color: $grey300;
+  font-size: 11px;
+}
+.cancel {
+  color: $purple500;
+  background-color: $purple900;
+  font-size: 11px;
+}
+.unknow {
+  color: $blue700;
+  background-color: $blue900;
+  font-size: 11px;
 }

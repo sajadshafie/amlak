@@ -5,15 +5,18 @@ import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AppTooltip from "@/libs/Tooltip";
 import AppDrawer from "./drawer";
+import AppModal from "@/common/AppModal";
 type providerAppType = {
   username: string;
   children: React.ReactNode;
-  active;
+  active: boolean;
+  confirmModal: boolean;
 };
 
 const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState<boolean>(true);
+
   return (
     <Grid>
       <Grid

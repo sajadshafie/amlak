@@ -17,6 +17,12 @@ export default function App({ Component, pageProps }: AppProps) {
     maxWidth: { xs: "100%", xl: "1536px" },
     px: { xs: 2, md: 4 },
     margin: "200px auto 0 auto",
+    user_detail: {
+      username: "",
+      family: "",
+      department: "",
+      role: "",
+    },
   });
   return (
     <>

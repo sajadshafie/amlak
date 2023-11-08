@@ -4,6 +4,11 @@ import AppTextValidator from "@/libs/AppTextvalidator";
 import { Grid, Typography } from "@mui/material";
 import FormLayout from "@/Layout/formLayout";
 import { adviserType } from "@/types/addvertise";
+import AppTextArea from "@/common/Apptextarea";
+import global from "@/global";
+import InputFileUpload from "@/common/Appupload";
+import Appimage from "@/common/Appimage";
+import Imageuploaded from "@/libs/imageuploaded";
 type formTypes = {
   open: boolean;
   onClose: () => void;
@@ -13,6 +18,8 @@ type formTypes = {
   submitText: string;
   cancelText: string;
   loading: boolean;
+  onUploadImage: (e: any) => void;
+  onRemoveImage: (v: any, index: number) => void;
 };
 
 const FormAdd: React.FC<Partial<formTypes>> = (props) => {
@@ -30,32 +37,39 @@ const FormAdd: React.FC<Partial<formTypes>> = (props) => {
       >
         <Grid>
           <Typography variant="h3" mb={5}>
-            اگهی
+            آگهی
           </Typography>
-          <Grid mb={2}>
-            <AppTextValidator
-              type="text"
-              fullWidth
-              label={"نوع ملک*"}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                props.onChangeForm(e.target.value, "type")
-              }
-              validators={require}
-              errorMessages={errMessage}
-              value={props.form?.type}
+          <Grid mb={2} container>
+            <InputFileUpload
+              label="بارگذاری عکس"
+              sx={{ height: "100px", mb: 2, ml: 2 }}
+              onChange={props.onUploadImage}
             />
+            {props.form?.images?.map((v: any, i: number) => {
+              return (
+                <Grid key={i} width={"133px"} height={"100px"} ml={2} mb={2}>
+                  <Imageuploaded onClick={() => props.onRemoveImage(v, i)}>
+                    <Appimage
+                      src={v.base64}
+                      alt="/"
+                      style={{ borderRadius: "12px" }}
+                    />
+                  </Imageuploaded>
+                </Grid>
+              );
+            })}
           </Grid>
           <Grid mb={2}>
             <AppTextValidator
               type="text"
               fullWidth
-              label={"نوع ملک*"}
+              label={" نام ملک*"}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                props.onChangeForm(e.target.value, "type")
+                props.onChangeForm(e.target.value, "title")
               }
               validators={require}
               errorMessages={errMessage}
-              value={props.form?.type}
+              value={props.form?.title}
             />
           </Grid>
           <Grid mb={2}>
@@ -64,50 +78,31 @@ const FormAdd: React.FC<Partial<formTypes>> = (props) => {
               fullWidth
               label={"متراژ*"}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                props.onChangeForm(e.target.value, "meter")
+                props.onChangeForm(e.target.value, "meterage")
               }
               validators={require}
               errorMessages={errMessage}
-              value={props.form?.meter}
+              value={global.handleNumberAndDecimal(props.form?.meterage)}
             />
           </Grid>
           <Grid mb={2}>
             <AppTextValidator
               type="text"
               fullWidth
-              label={"منطقه*"}
+              label={"قیمت*"}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                props.onChangeForm(e.target.value, "location")
+                props.onChangeForm(e.target.value, "price")
               }
               validators={require}
               errorMessages={errMessage}
-              value={props.form?.location}
+              value={global.handleNumberAndDecimal(props.form?.price)}
             />
           </Grid>
-          <Grid mb={2}>
-            <AppTextValidator
-              type="text"
-              fullWidth
-              label={"قیمت هر متر*"}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                props.onChangeForm(e.target.value, "price_meter")
-              }
-              validators={require}
-              errorMessages={errMessage}
-              value={props.form?.price_meter}
-            />
-          </Grid>
-          <Grid mb={2}>
-            <AppTextValidator
-              type="text"
-              fullWidth
-              label={"وضعیت*"}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                props.onChangeForm(e.target.value, "status")
-              }
-              validators={require}
-              errorMessages={errMessage}
-              value={props.form?.status}
+
+          <Grid mb={2} width={"100%"} height={"100px"}>
+            <AppTextArea
+              placeholder="توضیحات"
+              value={props.form?.description}
             />
           </Grid>
         </Grid>

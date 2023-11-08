@@ -6,7 +6,7 @@
 export default function themeTypography(theme) {
   return {
     direction: "rtl",
-    fontFamily: "Iransans",
+    fontFamily: "Iransans_number",
     h6w: {
       fontWeight: 700,
       color: theme.heading,

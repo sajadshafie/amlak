@@ -1,6 +1,12 @@
 import Appbutton from "@/common/Appbutton";
 import { Grid, Typography } from "@mui/material";
-import React, { useRef, useState, ChangeEvent } from "react";
+import React, {
+  useRef,
+  useState,
+  ChangeEvent,
+  useEffect,
+  useContext,
+} from "react";
 import AppTextValidator from "@/libs/AppTextvalidator";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import Applink from "@/common/Applink";
@@ -8,47 +14,44 @@ import api from "@/config/api";
 import { toast } from "react-toastify";
 import { Text } from "@/global/text";
 import Cookies from "js-cookie";
+import { context } from "@/context";
+import { useRouter } from "next/router";
 type formType = {
   username: string;
   password: string;
 };
 
 const Loginform: React.FC = () => {
+  const router = useRouter();
   const [form, setForm] = useState<formType>({
     username: "",
     password: "",
   });
+  const { state, setState } = useContext(context);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json", // Specify the content type as JSON
-      // Add any other headers required by your API
-    },
-    body: JSON.stringify(form), // Convert the data to JSON string
-  };
 
   const onSubmitForm = () => {
     setLoading(true);
-    // fetch("http://api2.talaremelk.ir/api/User/Login", options)
-    //   .then((response) => response.json()) // Parse the response as JSON
-    //   .then((data) => {
-    //     // Handle the response data
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     // Handle any errors that occur during the request
-    //     console.error("Error:", error);
-    //   });
     api
       .login(form)
       .then((res) => {
+        Cookies.set("usertoken", res.data.result.token);
+        const dd = res.data.result;
+        setState({
+          ...state,
+          user_detail: {
+            department: dd.departmentTitle,
+            role: dd.roleTitle,
+            username: dd.username,
+            family: "",
+          },
+        });
         setForm({
           username: "",
           password: "",
         });
         setLoading(false);
+        router.push("/provider");
       })
       .catch((err) => {
         setLoading(false);

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 export const udata = Cookies.get("usertoken");
 export const config = axios.create({
-  baseURL: "http://api2.talaremelk.ir/",
+  baseURL: "/",
   headers: {
     Authorization: udata,
   },
@@ -20,5 +20,3 @@ config.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
-

@@ -20,7 +20,8 @@ type detailType = {
   id: number;
 };
 
-const Product: React.FC = () => {
+const Product: React.FC = ({ data }: { data?: any }) => {
+  console.log(data);
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const { state } = useContext(context);

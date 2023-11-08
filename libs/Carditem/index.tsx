@@ -61,7 +61,12 @@ const Carditem: React.FC<Partial<productType>> = (props) => {
           sx={{ width: { xs: "100%", sm: "80%", md: "60%" }, margin: "0 auto" }}
         >
           <Appbutton
-            onClick={() => router.push("/product/test")}
+            onClick={() =>
+              router.push({
+                pathname: `/product/[index]`,
+                query: { index: "test" },
+              })
+            }
             disabled={props.is_selled}
             fullWidth
             textVariant="h5"

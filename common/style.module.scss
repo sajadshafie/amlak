@@ -23,3 +23,22 @@
   transition: 0.1s;
   color: #212121;
 }
+.text_area {
+  border-radius: 4px;
+  background-color: white;
+  width: 100%;
+  resize: none;
+  height: 100%;
+  padding: 10px 8px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.text_area::placeholder {
+  font-size: 20px;
+}
+.text_area:focus {
+  // border-color: $primaryMain;
+  // border-width: 1.5px;
+  outline: 1.5px solid $primaryMain;
+  outline-offset: 0px;
+}

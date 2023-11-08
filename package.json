@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3030",
-    "start": "next start -p 3030",
+    "dev": "next dev -p 3000",
+    "start": "next start -p 3000",
     "build": "next build",
     "lint": "next lint"
   },
@@ -17,6 +17,7 @@
     "@mui/styled-engine-sc": "^5.14.6",
     "@mui/styles": "^5.14.6",
     "@mui/system": "^5.14.6",
+    "@mui/x-data-grid": "^6.18.0",
     "@types/node": "20.5.4",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
