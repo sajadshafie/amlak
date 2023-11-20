@@ -5,6 +5,8 @@
   font-size: 12px;
   transition: 0.1s;
   color: $yellow100;
+  display: flex;
+  align-items: center;
 }
 .link:hover {
   color: $yellow200;

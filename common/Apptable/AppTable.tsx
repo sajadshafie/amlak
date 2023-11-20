@@ -25,6 +25,7 @@ import Global from "@/global";
 //Box Filter  table
 import FilterTable from "./Table/FillterTable";
 import Process from "./process";
+import IconAction from "./Table/iconAction";
 
 type propsType = {
   rows: object[];
@@ -39,10 +40,11 @@ type propsType = {
     data: any,
     index: number
   ) => void;
-  onPagination: () => void;
+  onPagination: (e: any, value: number) => void;
   totalPage: number;
   buttonDotted: boolean;
   isPaginate: boolean;
+  page: number;
 };
 
 const AppTable: React.FC<Partial<propsType>> = (props) => {
@@ -129,52 +131,9 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
         className={classRender()}
         align="right"
       >
-        <Grid display={"flex"} alignItems="center">
-          {
-            <Tooltip title={"مشاهده جزییات"}>
-              <Grid
-                style={{ marginLeft: "25px" }}
-                onClick={() => onAction("view", index, content, data, index)}
-              >
-                <IconButton>
-                  <RemoveRedEyeIcon
-                    sx={{
-                      color: theme.palette.info.main,
-                    }}
-                  />
-                </IconButton>
-              </Grid>
-            </Tooltip>
-          }
-          <Tooltip title={"تغییر"}>
-            <Grid
-              style={{ marginLeft: "25px" }}
-              onClick={() => onAction("edit", index, content, data, index)}
-            >
-              <IconButton>
-                <EditOutlinedIcon
-                  sx={{
-                    color: theme.palette.primary.yellow300,
-                  }}
-                />
-              </IconButton>
-            </Grid>
-          </Tooltip>
-          <Tooltip title={"حذف"}>
-            <Grid
-              style={{ marginLeft: "25px" }}
-              onClick={() => onAction("delete", index, content, data, index)}
-            >
-              <IconButton>
-                <DeleteOutlineOutlinedIcon
-                  sx={{
-                    color: theme.palette.error.dark,
-                  }}
-                />
-              </IconButton>
-            </Grid>
-          </Tooltip>
-        </Grid>
+        <IconAction
+          onAction={(type) => onAction(type, index, content, data, index)}
+        />
       </TableCell>
     );
   };
@@ -313,13 +272,15 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
       </TableContainer>
 
       {/* DOWNLOAD BUTTONS Excells */}
-      <Grid container my={2}>
-        <Grid item xs={2}>
+      <Grid container my={2} justifyContent={"space-between"}>
+        <Grid item xs={5}>
           {props.isPaginate && (
             <Pagination
               onChange={props.onPagination}
               variant="outlined"
               count={props.totalPage}
+              color="primary"
+              defaultPage={props.page}
             />
           )}
         </Grid>
@@ -327,7 +288,7 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
         {props.isLoading == "data" && (
           <Grid
             item
-            xs={10}
+            xs={3}
             display="flex"
             direction="row"
             justifyContent="flex-end"

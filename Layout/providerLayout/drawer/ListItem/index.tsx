@@ -5,9 +5,17 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  useTheme,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+type propstype = {
+  open: boolean;
+  active: number;
+};
 
 type itemTypes = {
   title: string;
@@ -16,7 +24,9 @@ type itemTypes = {
   icon: React.ReactNode;
 };
 
-const ListItemApp: React.FC = () => {
+const ListItemApp: React.FC<Partial<propstype>> = (props) => {
+  const router = useRouter();
+  const theme = useTheme();
   const Items: itemTypes[] = [
     {
       title: "اگهی",
@@ -37,11 +47,23 @@ const ListItemApp: React.FC = () => {
       icon: <InboxIcon sx={{ color: "white" }} />,
     },
   ];
+  const handleLogout = () => {
+    Cookies.remove("usertoken");
+    router.push("/login");
+  };
   return (
     <>
       {Items.map((v: itemTypes, i: number) => {
         return (
-          <ListItem disablePadding key={i}>
+          <ListItem
+            disablePadding
+            key={i}
+            sx={{
+              background:
+                props.active == v.id ? theme.palette.primary.yellow300 : "",
+              borderRadius: "12px",
+            }}
+          >
             <ListItemButton>
               <ListItemIcon>{v.icon}</ListItemIcon>
               <Typography
@@ -50,15 +72,20 @@ const ListItemApp: React.FC = () => {
               >
                 {v.title}
               </Typography>
-              {/* <ListItemText
-                sx={{ textAlign: "right" }}
-                style={{ color: "white" }}
-                primary={v.title}
-              /> */}
             </ListItemButton>
           </ListItem>
         );
       })}
+      <ListItem disablePadding onClick={handleLogout}>
+        <ListItemButton>
+          <ListItemIcon>
+            <ExitToAppIcon sx={{ color: "white" }} />
+          </ListItemIcon>
+          <Typography variant="h5" sx={{ color: "white", textAlign: "right" }}>
+            {"خروج"}
+          </Typography>
+        </ListItemButton>
+      </ListItem>
     </>
   );
 };

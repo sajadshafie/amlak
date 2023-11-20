@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import themes from "../themes/index";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import contextType from "@/types/contenxt";
+import { contextType, userTypes } from "@/types/contenxt";
 import { context } from "@/context";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,12 +17,19 @@ export default function App({ Component, pageProps }: AppProps) {
     maxWidth: { xs: "100%", xl: "1536px" },
     px: { xs: 2, md: 4 },
     margin: "200px auto 0 auto",
-    user_detail: {
+    boxShadow: "2px 13px 26px -9px rgba(61,61,61,0.47)",
+    userDetail: {
       username: "",
       family: "",
       department: "",
       role: "",
     },
+  });
+  const [userDetail, setUserDetail] = useState<userTypes>({
+    username: "",
+    family: "",
+    department: "",
+    role: "",
   });
   return (
     <>
@@ -32,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <context.Provider value={{ state, setState }}>
+      <context.Provider value={{ state, setState, userDetail, setUserDetail }}>
         <ThemeProvider theme={themes}>
           <Component {...pageProps} />
           <ToastContainer />

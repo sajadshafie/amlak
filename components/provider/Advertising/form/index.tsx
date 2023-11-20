@@ -9,6 +9,7 @@ import global from "@/global";
 import InputFileUpload from "@/common/Appupload";
 import Appimage from "@/common/Appimage";
 import Imageuploaded from "@/libs/imageuploaded";
+import Appselect from "@/common/Appselect";
 type formTypes = {
   open: boolean;
   onClose: () => void;
@@ -21,6 +22,21 @@ type formTypes = {
   onUploadImage: (e: any) => void;
   onRemoveImage: (v: any, index: number) => void;
 };
+
+const optionCategory = [
+  {
+    value: 0,
+    label: "نامشخص",
+  },
+  {
+    value: 1,
+    label: "زمین",
+  },
+  {
+    value: 2,
+    label: "آپارتمان",
+  },
+];
 
 const FormAdd: React.FC<Partial<formTypes>> = (props) => {
   const refForm = React.useRef<any>("form");
@@ -50,7 +66,7 @@ const FormAdd: React.FC<Partial<formTypes>> = (props) => {
                 <Grid key={i} width={"133px"} height={"100px"} ml={2} mb={2}>
                   <Imageuploaded onClick={() => props.onRemoveImage(v, i)}>
                     <Appimage
-                      src={v.base64}
+                      src={typeof v == "string" ? v : v.base64}
                       alt="/"
                       style={{ borderRadius: "12px" }}
                     />
@@ -98,11 +114,25 @@ const FormAdd: React.FC<Partial<formTypes>> = (props) => {
               value={global.handleNumberAndDecimal(props.form?.price)}
             />
           </Grid>
-
+          <Grid width={"100%"} height={"100px"}>
+            <Appselect
+              label="نوع ملک"
+              sx={{ width: "100%" }}
+              fullWidth
+              value={props.form?.category}
+              options={optionCategory}
+              handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+                props.onChangeForm(e.target.value, "category")
+              }
+            />
+          </Grid>
           <Grid mb={2} width={"100%"} height={"100px"}>
             <AppTextArea
               placeholder="توضیحات"
               value={props.form?.description}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                props.onChangeForm(e.target.value, "description")
+              }
             />
           </Grid>
         </Grid>

@@ -17,6 +17,7 @@ const AppTextArea: React.FC<Partial<propsType>> = (props) => {
       className={style.text_area}
       placeholder={props.placeholder}
       onChange={props.onChange}
+      value={props.value}
     />
   );
 };

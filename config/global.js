@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export const udata = Cookies.get("usertoken");
+export const imageURL = "http://cdn.talaremelk.ir/Images/";
 export const config = axios.create({
   baseURL: "/",
   headers: {
@@ -10,10 +11,6 @@ export const config = axios.create({
 });
 config.interceptors.request.use(
   (res) => {
-    const token = config.udata;
-    if (token) {
-      res.headers.Authorization = token;
-    }
     return res;
   },
   (error) => {

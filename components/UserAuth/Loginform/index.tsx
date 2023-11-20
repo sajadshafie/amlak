@@ -16,6 +16,7 @@ import { Text } from "@/global/text";
 import Cookies from "js-cookie";
 import { context } from "@/context";
 import { useRouter } from "next/router";
+
 type formType = {
   username: string;
   password: string;
@@ -27,24 +28,22 @@ const Loginform: React.FC = () => {
     username: "",
     password: "",
   });
-  const { state, setState } = useContext(context);
+  const { userDetail, setUserDetail } = useContext(context);
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmitForm = () => {
     setLoading(true);
     api
       .login(form)
-      .then((res) => {
+      .then(async (res) => {
         Cookies.set("usertoken", res.data.result.token);
         const dd = res.data.result;
-        setState({
-          ...state,
-          user_detail: {
-            department: dd.departmentTitle,
-            role: dd.roleTitle,
-            username: dd.username,
-            family: "",
-          },
+        await setUserDetail({
+          ...userDetail,
+          department: dd.departmentTitle,
+          role: dd.roleTitle,
+          username: dd.username,
+          family: "",
         });
         setForm({
           username: "",
@@ -54,12 +53,10 @@ const Loginform: React.FC = () => {
         router.push("/provider");
       })
       .catch((err) => {
+        console.log(err);
         setLoading(false);
         toast.error(Text.errorLogin);
       });
-  };
-  const onError = (err: any) => {
-    console.log(err);
   };
 
   const onChangeForm = (value: string, type: string) => {

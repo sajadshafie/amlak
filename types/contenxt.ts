@@ -1,15 +1,15 @@
-type userTypes = {
+export type userTypes = {
   username: string;
   family: string;
   role: string;
   department: string;
 };
 
-interface contextType {
+export interface contextType {
+  boxShadow: string;
   save_product: boolean;
   maxWidth: object;
   px: object;
   margin: string;
-  user_detail: userTypes;
+  userDetail: userTypes;
 }
-export default contextType;

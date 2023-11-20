@@ -1,5 +1,5 @@
 import ProviderLayout from "@/Layout/providerLayout";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import AppTable from "@/common/Apptable/AppTable";
 import MessageCard from "@/libs/Messagecard";
 import { toast } from "react-toastify";
@@ -8,6 +8,15 @@ import { adviserType } from "@/types/addvertise";
 import api from "@/config/api";
 import global from "@/global";
 import ConfrimModal from "@/components/confirmModal";
+import { useRouter } from "next/router";
+import { imageURL } from "@/config/global";
+import { useMediaQuery, Grid } from "@mui/material";
+import ListTable from "@/libs/cardTable";
+import BackTo from "@/libs/BackTo";
+import SearchTable from "@/components/provider/SearchTable";
+import propsTypeSearch from "@/types/searchTable";
+import axios from "axios";
+
 export async function getServerSideProps(context: any) {
   if (!context.req.cookies.usertoken) {
     return {
@@ -25,9 +34,22 @@ type confrimType = {
   name?: string;
   index?: number | null;
   isOpen?: boolean;
+  type?: string;
+};
+
+type paginationProps = {
+  count: number;
+  page: number;
+  pageSize: number;
 };
 
 const provider = (): JSX.Element => {
+  const media = useMediaQuery("(min-width:870px)");
+  const [pagination, setPagination] = useState<paginationProps>({
+    count: 0,
+    page: 1,
+    pageSize: 10,
+  });
   const titles = [
     "نوع زمین",
     "متراژ",
@@ -36,6 +58,12 @@ const provider = (): JSX.Element => {
     "وضعیت",
     "مشاهده و تغییرات",
   ];
+  const router = useRouter();
+  const [searchField, setSearchField] = useState<propsTypeSearch>({
+    documentType: 0,
+    status: 0,
+    title: "",
+  });
   const [listLoading, setListLoading] = useState<string>("loading");
   const [data, setData] = useState([]);
   const [confirmDetail, setConfirmDetail] = useState<confrimType>({
@@ -43,6 +71,7 @@ const provider = (): JSX.Element => {
     name: "",
     index: null,
     isOpen: false,
+    type: "",
   });
   const [form, setForm] = useState<adviserType>({
     title: "",
@@ -50,16 +79,26 @@ const provider = (): JSX.Element => {
     description: "",
     shamim: "فثس",
     documentType: 0,
-    price: 0,
+    price: null,
     category: 0,
     images: [],
   });
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState<string | null>("");
+  const [imagesRemoved, setImagesRemoved] = useState<string[]>([]);
+  const ImageToformdata = (array: any) => {
+    const fd = array?.map((v: any) => v.file);
+    const formdata = new FormData();
+    fd?.map((v: any, i: number) => {
+      formdata.append(`files`, v);
+    });
+
+    return formdata;
+  };
   const onAddition = () => {
     setForm({
       meterage: "",
-      price: 0,
+      price: null,
       status: 0,
       title: "",
       id: 0,
@@ -71,40 +110,65 @@ const provider = (): JSX.Element => {
     });
     setIsOpen("add");
   };
+
   const onChangeForm = (val: string, type: string) => {
     setForm({
       ...form,
       [type]: val,
     });
   };
-  const onUploadImage = (event: any) => {
+
+  const updateAddImage = async () => {
+    const filter = await form.images?.filter((v) => typeof v !== "string");
+    if (filter.length >= 1) {
+      api
+        .uploadImageAdd(form.id, ImageToformdata(filter))
+        .then((res) => {
+          GetData();
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("آپلود عکس نا موفق");
+        });
+    }
+  };
+
+  const onUploadImage = async (event: any) => {
     const ss = event.target.files[0];
-    global.blobToImage(ss).then((res) => {
+    await global.blobToImage(ss).then((res) => {
+      // console.log(form.images);
       const imgs = [...form.images, { base64: res, file: ss }];
       setForm({ ...form, images: imgs });
     });
   };
-  const addImage = (id?: any, body?: any[]) => {
+
+  const addImage = (id?: any, body?: any) => {
     api
       .insertImageAdvertise(id, body)
       .then((res) => {
         toast.success("اطلاعات آگهی با موفقیت ثبت شد");
         setLoading(false);
         setIsOpen(null);
+        GetData();
       })
       .catch((err) => {
         setLoading(false);
         toast.error("خطا در ثبت آگهی");
       });
   };
+
   const onRemoveImage = (v: any, index: number) => {
+    console.log(v);
     setConfirmDetail({
       ...confirmDetail,
       index: index,
       isOpen: true,
-      name: "این عکس",
+      name:
+        typeof v == "string" ? v.substring(v.lastIndexOf("/") + 1) : "این عکس",
+      type: "image",
     });
   };
+
   const removeAdvertise = () => {
     setLoading(true);
     api
@@ -116,22 +180,36 @@ const provider = (): JSX.Element => {
           index: null,
           isOpen: false,
         });
-        toast.success("حذف آگهی با موفقیت شنجام شد");
+        toast.success("حذف آگهی با موفقیت انجام شد");
         setLoading(false);
+        GetData();
       })
       .catch((err) => {
         setLoading(false);
         toast.error("حذف آگهی ناموفق ");
       });
   };
-  const onConfirmModal = () => {
-    if (confirmDetail.id == null) {
-      console.log(confirmDetail);
+
+  const removeImage = (id?: number, name?: string | string[]) => {
+    console.log(id, name);
+    api
+      .deleteImage(id, name)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+    // (await confirmDetail.name) !== "این عکس" &&
+    //   (await removeImage(form.id, confirmDetail.name));
+  };
+
+  const onConfirmModal = async () => {
+    if (confirmDetail.type == "image") {
       const img = [...form.images].filter((v, i) => i !== confirmDetail.index);
       setForm({
         ...form,
         images: img,
       });
+      await setImagesRemoved((state) => [...state, confirmDetail.name]);
       setConfirmDetail({
         index: null,
         isOpen: false,
@@ -142,6 +220,7 @@ const provider = (): JSX.Element => {
       removeAdvertise();
     }
   };
+
   const handleAddNewAdvertise = () => {
     api
       .insertAdvertise({
@@ -150,9 +229,7 @@ const provider = (): JSX.Element => {
         meterage: global.DecimalToNumber(form.meterage),
       })
       .then((res) => {
-        const fd = new FormData();
-        fd.append("files", JSON.stringify(form.images?.map((v) => v.file)));
-        addImage(res.data.result, fd);
+        addImage(res.data.result, ImageToformdata(form.images));
       })
       .catch((err) => {
         setLoading(false);
@@ -160,17 +237,27 @@ const provider = (): JSX.Element => {
       });
   };
 
-  const handleEditAdvertise = () => {
-    api
-      .updateAdvertise(form.id, form)
-      .then((res) => {
-        setLoading(false);
-        setIsOpen(null);
-
-        GetData();
+  const handleEditAdvertise = async () => {
+    await api
+      .updateAdvertise(form.id, {
+        ...form,
+        shamim: "4",
+        price: global.DecimalToNumber(form.price),
+        meterage: global.DecimalToNumber(form.meterage),
+      })
+      .then(async (res) => {
+        imagesRemoved.length >= 1 &&
+          (await removeImage(form.id, imagesRemoved));
+        await updateAddImage();
+        await setLoading(false);
+        await setIsOpen(null);
+        await toast.success("تغییرات با موفقیت ثبت شد");
+        // await GetData();
       })
       .catch((err) => {
         setLoading(false);
+        toast.error("خطا در ثبت اطلاعات");
+        console.log(err);
       });
   };
 
@@ -179,44 +266,18 @@ const provider = (): JSX.Element => {
     isOpen == "add" ? handleAddNewAdvertise() : handleEditAdvertise();
   };
 
-  const GetData = () => {
+  const GetData = async (query?: string) => {
     setListLoading("loading");
-    api
-      .getAdvertiseList()
+    await axios
+      .get("Api/Advertisement/AdvancedSearch")
       .then((res) => {
-        setListLoading("data");
-
-        const response = res.data.result.map((v: adviserType, i: number) => {
-          return {
-            title: v.title,
-            meterage: v.meterage.toLocaleString("en-CA"),
-            address: "تهران - شهرری",
-            price: v.price.toLocaleString("en-CA"),
-            none: {
-              description: v.description,
-              id: v.id,
-            },
-            status: {
-              content: global.statusResult(v.status)?.status,
-              type: global.statusResult(v.status)?.type,
-            },
-            button: [
-              {
-                title: "edit",
-              },
-              {
-                title: "delete",
-              },
-            ],
-          };
-        });
-        setData(response);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
-        setListLoading("error");
       });
   };
+
   const handleAction = (
     item: any,
     ind: number,
@@ -224,7 +285,6 @@ const provider = (): JSX.Element => {
     data: any,
     index: number
   ) => {
-    console.log(data);
     if (item == "edit") {
       setIsOpen("edit");
       setForm({
@@ -236,16 +296,43 @@ const provider = (): JSX.Element => {
         description: data.none.description,
         shamim: "فثس",
         documentType: 0,
-        category: 0,
+        category: data.none.category,
+        images: data.none.images,
       });
-    } else {
+    } else if (item == "delete") {
       setConfirmDetail({
         id: data.none.id,
         isOpen: true,
         name: data.title,
         index: null,
       });
+    } else {
+      router.push({
+        pathname: "/provider/advertise_detail/[index]",
+        query: { index: data.none.id },
+      });
     }
+  };
+
+  const onPagination = (e: any, value: number) => {
+    GetData(true, value);
+  };
+  const onChangeSearchBar = (
+    e: ChangeEvent<HTMLInputElement>,
+    type: string
+  ) => {
+    setSearchField({ ...searchField, [type]: e.target.value });
+  };
+  const onClickSearchBar = () => {
+    GetData(
+      `${searchField.title ? `title=${searchField.title}` : ""} ${
+        searchField.status ? `&status=${searchField.status}` : ""
+      } ${
+        searchField.documentType
+          ? `&documentType=${searchField.documentType}`
+          : ""
+      }`
+    );
   };
   useEffect(() => {
     GetData();
@@ -253,11 +340,13 @@ const provider = (): JSX.Element => {
 
   return (
     <ProviderLayout active={1}>
+      <BackTo title="مشاهده سایت" link="/" />
       <ConfrimModal
         title={`آیا مطمعن هستید میخواهید ${confirmDetail.name} را حذف کنید`}
         isOpen={confirmDetail.isOpen}
         onClose={() => setConfirmDetail({ ...confirmDetail, isOpen: false })}
         onConfirm={onConfirmModal}
+        loading={loading}
       />
       <FormAdd
         onRemoveImage={onRemoveImage}
@@ -281,13 +370,35 @@ const provider = (): JSX.Element => {
         buttonText="افزودن ملک جدید"
         buttonAction={onAddition}
       />
-      <AppTable
-        isLoading={listLoading}
-        rows={data}
-        lables={titles}
-        buttonDotted={true}
-        handleAction={handleAction}
-      />
+      <Grid mt={2}>
+        <SearchTable
+          onChange={onChangeSearchBar}
+          onSearch={onClickSearchBar}
+          searchField={searchField}
+        />
+      </Grid>
+      {!media ? (
+        <ListTable
+          data={data}
+          onAction={handleAction}
+          totalPage={pagination.count}
+          page={pagination.page}
+          onPagination={onPagination}
+          isLoading={listLoading}
+        />
+      ) : (
+        <AppTable
+          isLoading={listLoading}
+          rows={data}
+          lables={titles}
+          buttonDotted={true}
+          handleAction={handleAction}
+          isPaginate
+          totalPage={pagination.count}
+          page={pagination.page}
+          onPagination={onPagination}
+        />
+      )}
     </ProviderLayout>
   );
 };

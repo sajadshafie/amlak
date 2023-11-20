@@ -8,6 +8,7 @@ type propstypes = {
   title: string;
   onConfirm: () => void;
   onClose: () => void;
+  loading: boolean;
 };
 
 const ConfrimModal: React.FC<Partial<propstypes>> = (props) => {
@@ -33,6 +34,7 @@ const ConfrimModal: React.FC<Partial<propstypes>> = (props) => {
             sx={{ mr: 1 }}
             textVariant="h6"
             variant="contained"
+            loading={props.loading}
           >
             تایید
           </Appbutton>

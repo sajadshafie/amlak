@@ -1,6 +1,6 @@
 interface optionType {
   label: string;
-  value: string;
+  value: number;
 }
 
 export default optionType;

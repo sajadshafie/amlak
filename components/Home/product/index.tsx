@@ -1,26 +1,30 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
-import { product_item } from "./Items";
-import productType from "@/types/product";
 import Carditem from "@/libs/Carditem";
-const Product: React.FC = () => {
+import { adviserType } from "@/types/addvertise";
+
+type propsType = {
+  data: adviserType[];
+  title: string;
+};
+
+const Product: React.FC<Partial<propsType>> = (props) => {
   return (
     <Grid
       sx={{
         maxWidth: {
           xs: "100%",
           lg: "1536px",
-          margin: "160px auto 0 auto",
         },
       }}
     >
       <Typography variant="h3" mb={4} textAlign={"center"}>
-        لیست ملک های جدید
+        {props.title}
       </Typography>
       <Grid container>
-        {product_item.map((v: productType, i: number) => {
+        {props.data?.map((v: adviserType, i: number) => {
           return (
-            <Grid key={i} pl={2} pb={2} item md={4} sm={6} xs={12}>
+            <Grid key={i} pl={2} pb={2} item lg={3} md={4} sm={6} xs={12}>
               <Carditem {...v} />
             </Grid>
           );

@@ -22,7 +22,7 @@ const Appimage: React.FC<Partial<Props>> = (props) => {
         src={props.src}
         width={props.width}
         height={props.height}
-        alt={props.alt}
+        alt={"/"}
         // placeholder={"blur"}
         fill={true}
       />

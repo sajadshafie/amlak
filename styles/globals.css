@@ -19,6 +19,9 @@ body {
   src: url(../public/fonts/IRANSans/IRANSans\(FaNum\).ttf) format("truetype");
   font-weight: 400;
 }
+textarea {
+  font-family: iransans_number;
+}
 .Toastify__toast-body {
   font-family: iransans_number !important;
 }

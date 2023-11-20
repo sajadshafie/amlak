@@ -14,7 +14,7 @@ export interface adviserType {
   long?: string;
   id?: number;
   userId?: number;
-  price?: number;
+  price?: number | null;
   shamim?: string;
-  images?: any[];
+  images?: any[] | string;
 }

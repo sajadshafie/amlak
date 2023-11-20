@@ -1,11 +1,13 @@
 import { Grid, Typography, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AppTooltip from "@/libs/Tooltip";
 import AppDrawer from "./drawer";
 import AppModal from "@/common/AppModal";
+import { context } from "@/context";
+import BackTo from "@/libs/BackTo";
 type providerAppType = {
   username: string;
   children: React.ReactNode;
@@ -14,9 +16,11 @@ type providerAppType = {
 };
 
 const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
+  const { state, setState } = useContext(context);
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState<boolean>(true);
-
+  const userDetail = state?.userDetail;
+  console.log(userDetail);
   return (
     <Grid>
       <Grid
@@ -35,14 +39,16 @@ const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
           onClick={() => setIsOpen(!isOpen)}
         />
         <Grid display={"flex"} alignItems={"center"}>
-          <AppTooltip title="اعلان ها">
-            <NotificationsIcon
-              sx={{
-                color: theme.palette.primary.yellow300,
-                ml: 2,
-              }}
-            />
-          </AppTooltip>
+          {/* <Grid>
+            <AppTooltip title="اعلان ها">
+              <NotificationsIcon
+                sx={{
+                  color: theme.palette.primary.yellow300,
+                  ml: 2,
+                }}
+              />
+            </AppTooltip>
+          </Grid> */}
           <PersonIcon
             sx={{
               color: theme.palette.primary.yellow300,
@@ -50,7 +56,7 @@ const ProviderLayout: React.FC<Partial<providerAppType>> = (props) => {
             }}
           />
 
-          <Typography variant="h6">سجاد شفیعی</Typography>
+          <Typography variant="h6">{userDetail.username}</Typography>
         </Grid>
       </Grid>
       <Grid display={"flex"} id="content">

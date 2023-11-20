@@ -1,6 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   swcMinify: false,
+  trailingSlash: true,
+  images: {
+    domains: ["cdn.talaremelk.ir"],
+    // remotePatterns: [
+    //   {
+    //     protocol: "http",
+    //     hostname: "localhost:3000",
+    //     port: "",
+    //     pathname: "http://cdn.talaremelk.ir/Images//**",
+    //   },
+    // ],
+  },
   async rewrites() {
     return [
       {

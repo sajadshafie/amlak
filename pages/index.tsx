@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Main from "@/Layout/main";
 import Iconbox from "@/components/Home/Iconbox";
 import Carousel from "@/libs/Carousel";
@@ -8,14 +8,42 @@ import Product from "@/components/Home/product";
 import Whymehr from "@/components/Home/Whymehr";
 import { CityItems, iconbox_items } from "@/components/Home/Icon_city_items";
 import { context } from "@/context";
+import api from "@/config/api";
+import ProccessLoading from "@/libs/processloading";
+import { adviserType } from "@/types/addvertise";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import Applink from "@/common/Applink";
+
 type iconBox = {
   title: string;
   description: string;
   icon: React.ReactNode;
 };
 const Home = (): JSX.Element => {
+  const { state, setState } = useContext(context);
+  const [process, setProcess] = useState<"loading" | "data" | "error">(
+    "loading"
+  );
+  const [advertising, setAdvertising] = useState<adviserType[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      setProcess("loading");
+      api
+        .getAdvertiseList()
+        .then(async (res) => {
+          setProcess("data");
+          // console.log(res);
+          await setAdvertising(res.data.result);
+        })
+        .catch((err) => {
+          setProcess("error");
+        });
+    };
+    getData();
+  }, []);
   const theme = useTheme();
-  const { state } = useContext(context);
+
   return (
     <>
       <Main active={1}>
@@ -65,7 +93,17 @@ const Home = (): JSX.Element => {
             px: { xs: 2, md: 4 },
           }}
         >
-          <Product />
+          <Grid sx={{ margin: "160px auto 0 auto" }}>
+            <ProccessLoading process={process} onCallBack={() => getData()}>
+              <Product data={advertising} title="لیست ملک های جدید" />
+            </ProccessLoading>
+          </Grid>
+          <Grid display={"flex"} justifyContent={"center"} width={"100%"}>
+            <Applink link="/viewall">
+              مشاهده همه
+              <KeyboardBackspaceIcon sx={{ fontSize: "18px" }} />
+            </Applink>
+          </Grid>
         </Grid>
         <Grid
           container

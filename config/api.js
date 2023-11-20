@@ -1,16 +1,31 @@
 import { config } from "./global";
 
+const handleSearchList = (query, id, pageNumber, pageSize) => {
+  let res;
+  if (query) {
+    res = `?${id ? `id=${id}` : ""}  ${
+      pageNumber ? `&PageNumber=${pageNumber}` : ""
+    }${pageSize ? `&PageSize=${pageSize}` : ""}`;
+  } else {
+    res = "";
+  }
+  return res;
+};
+
 export default {
   login: (body) => {
     return config.post("api/User/Login", body);
   },
 
   //##########  ADVERTISE START ###############
-  advertiseAdvanceSearch: () => {
-    return config.get("Api/Advertisement/AdvancedSearch");
+  advertiseAdvanceSearch: (query) => {
+    return config.get(
+      `Api/Advertisement/AdvancedSearch${query ? `?${query}` : ""}`
+    );
   },
-  getAdvertiseList: () => {
-    return config.get("Api/Advertisement/Get");
+
+  getAdvertiseList: (query) => {
+    return config.get(`Api/Advertisement/Get${query ? `?${query}` : ""}`);
   },
   insertAdvertise: (body) => {
     return config.post("Api/Advertisement/Insert", body);
@@ -22,6 +37,12 @@ export default {
     return config.post(`Api/Image/${id}/Insert`, body);
   },
   removeAdvertise: (id) => {
-    return config.post("Api/Advertisement/Delete", { id: id });
+    return config.delete(`Api/Advertisement/Delete?id=${id}`);
+  },
+  uploadImageAdd: (id, body) => {
+    return config.post(`Api/Image/${id}/Add`, body);
+  },
+  deleteImage: (id, image) => {
+    return config.delete(`Api/Image/${id}/Delete?images=${image}`);
   },
 };

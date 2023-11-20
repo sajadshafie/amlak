@@ -27,6 +27,7 @@
     "eslint-config-next": "13.4.19",
     "google-map-react": "^2.2.1",
     "i": "^0.3.7",
+    "jalali-moment": "^3.3.11",
     "js-cookie": "^3.0.5",
     "jss": "^10.10.0",
     "jss-rtl": "^0.3.0",

@@ -1,38 +1,45 @@
-import React from "react";
-import { Grid, Typography, Popover, TextField } from "@mui/material";
-import Items from "./items";
+import React, { useState } from "react";
+import {
+  Grid,
+  Typography,
+  Popover,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+
 import PersonIcon from "@mui/icons-material/Person";
-import style from "./style.module.scss";
+
 import Appbutton from "@/common/Appbutton";
 import Profile from "./profile";
-import { useRouter } from "next/router";
-import Applink from "@/common/Applink";
-type Menu = {
-  title: string;
-  id: number;
-  link: string;
-};
 
+import Cookies from "js-cookie";
+import Listrender from "./listRender";
+import MenuIcon from "@mui/icons-material/Menu";
+import DrawerMenu from "./listRender/drawerMenu";
 type Props = {
   active: number;
 };
 
 const Header: React.FC<Partial<Props>> = (props) => {
+  const theme = useTheme();
+  const query = useMediaQuery("(min-width:1055px)");
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-  const router = useRouter();
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const onToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const isLoging = typeof Cookies.get("usertoken") == "string";
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-
+  console.log(isLoging);
   return (
     <Grid
       container
@@ -45,39 +52,26 @@ const Header: React.FC<Partial<Props>> = (props) => {
       justifyContent={"space-between"}
       alignItems={"center"}
     >
-      <Grid container md={7} sm={7} item>
-        {Items.map((v: Menu, i: number) => {
-          return (
-            <Grid
-              p={2}
-              ml={2}
-              className={style.item_hover}
-              sx={{ cursor: "pointer" }}
-            >
-              <Applink link={v.link}>
-                <>
-                  <Typography
-                    className={`${
-                      props.active == v.id && "text_active_main"
-                    } text_transition_main `}
-                    variant="h5"
-                    key={i}
-                  >
-                    {v.title}
-                  </Typography>
-                </>
-              </Applink>
+      {!query ? (
+        <React.Fragment>
+          <MenuIcon
+            onClick={onToggle}
+            sx={{
+              cursor: "pointer",
+              color: theme.palette.primary.main,
+              fontSize: "30px",
+            }}
+          />
+          <DrawerMenu
+            isOpen={drawerOpen}
+            active={props.active}
+            onClose={() => setDrawerOpen(false)}
+          />
+        </React.Fragment>
+      ) : (
+        <Listrender active={props.active} />
+      )}
 
-              <Typography
-                mt={0.5}
-                className={`${
-                  props.active == v.id ? style.active_menu : style.line
-                }`}
-              />
-            </Grid>
-          );
-        })}
-      </Grid>
       <Grid md={5} sm={5} justifyContent={"flex-end"} container item>
         <Grid sx={{ display: "flex", alignItems: "center" }}>
           <Grid
@@ -92,7 +86,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
           >
             <PersonIcon sx={{ fontSize: "25px" }} />
             <Typography variant="caption" className="text_transition_sub">
-              ورود فروشنده
+              {isLoging ? "حساب کاربری" : "ورود فروشنده"}
             </Typography>
           </Grid>
           {/* <Appbutton variant="contained">ثبت اگهی</Appbutton> */}
@@ -111,7 +105,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
             horizontal: "left",
           }}
         >
-          <Profile />
+          <Profile isLoging={isLoging} />
         </Popover>
       </Grid>
     </Grid>

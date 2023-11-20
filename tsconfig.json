@@ -24,6 +24,6 @@
     "palette/typography.js",
     "themes/compStyleOverride.js",
     "libs/AppTextvalidator/index.js"
-  ],
+, "pages/product/[slug].js"  ],
   "exclude": ["node_modules"]
 }
