@@ -7,6 +7,7 @@ export const config = axios.create({
   baseURL: "/",
   headers: {
     Authorization: udata,
+    "Cache-Control": "no-cache",
   },
 });
 config.interceptors.request.use(

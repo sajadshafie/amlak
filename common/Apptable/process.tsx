@@ -2,9 +2,10 @@ import React from "react";
 import { TableBody, useTheme, TableRow, TableCell } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import DangerousIcon from "@mui/icons-material/Dangerous";
-
+import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
 type propsTypes = {
   loading: string;
+  data: any[];
 };
 
 const Process: React.FC<Partial<propsTypes>> = (props) => {
@@ -32,21 +33,36 @@ const Process: React.FC<Partial<propsTypes>> = (props) => {
             flexDirection: "column",
           }}
         >
-          {props.loading == "loading" ? (
+          {props.loading == "loading" && (
             <>
               <CircularProgress size={28} sx={{ marginBottom: "10px" }} />
-              <span style={{ fontSize: 12, color: theme.palette.grey[500] }}>
+              <span style={{ fontSize: 14, color: theme.palette.grey[500] }}>
                 در حال بارگذاری اطلاعات
               </span>
             </>
-          ) : (
+          )}
+          {props.loading == "error" && (
             <>
               <DangerousIcon
                 size={35}
                 sx={{ marginBottom: "10px", color: theme.palette.error.main }}
               />
-              <span style={{ fontSize: 12, color: theme.palette.grey[500] }}>
+              <span style={{ fontSize: 14, color: theme.palette.grey[500] }}>
                 خطا در پردازش اطلاعات
+              </span>
+            </>
+          )}
+          {props.loading == "data" && props.data?.length == 0 && (
+            <>
+              <LocalPostOfficeIcon
+                size={35}
+                sx={{
+                  marginBottom: "10px",
+                  color: theme.palette.primary.dark,
+                }}
+              />
+              <span style={{ fontSize: 14, color: theme.palette.grey[500] }}>
+                اطلاعات یافت نشد
               </span>
             </>
           )}

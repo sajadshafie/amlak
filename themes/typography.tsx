@@ -3,7 +3,7 @@
  * @param {JsonObject} theme theme customization object
  */
 
-export default function themeTypography(theme) {
+export default function themeTypography(theme: any) {
   return {
     direction: "rtl",
     fontFamily: "Iransans_number",

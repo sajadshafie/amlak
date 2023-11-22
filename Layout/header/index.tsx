@@ -36,10 +36,14 @@ const Header: React.FC<Partial<Props>> = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const isLoging = typeof Cookies.get("usertoken") == "string";
+  const checkLogin = async () => {
+    const isLoging: boolean =
+      (await typeof Cookies.get("usertoken")) == "string";
+    return isLoging;
+  };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-  console.log(isLoging);
+
   return (
     <Grid
       container
@@ -86,7 +90,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
           >
             <PersonIcon sx={{ fontSize: "25px" }} />
             <Typography variant="caption" className="text_transition_sub">
-              {isLoging ? "حساب کاربری" : "ورود فروشنده"}
+              {checkLogin() ? "حساب کاربری" : "ورود"}
             </Typography>
           </Grid>
           {/* <Appbutton variant="contained">ثبت اگهی</Appbutton> */}
@@ -105,7 +109,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
             horizontal: "left",
           }}
         >
-          <Profile isLoging={isLoging} />
+          <Profile isLoging={checkLogin()} />
         </Popover>
       </Grid>
     </Grid>

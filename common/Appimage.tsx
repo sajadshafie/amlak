@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 type Props = {
-  src: string;
+  src: string | any;
   width: number;
   height: number;
   alt: string;

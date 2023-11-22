@@ -8,6 +8,7 @@ type Appprops = {
   children: string | React.ReactNode;
   title: string;
   onClick: () => void;
+  style: React.CSSProperties;
 };
 
 const Applink: React.FC<Partial<Appprops>> = (props) => {
@@ -19,6 +20,7 @@ const Applink: React.FC<Partial<Appprops>> = (props) => {
       title={props.title}
       href={props.link ? props.link : "/"}
       className={style.link}
+      style={props.style}
     >
       {props.children}
     </Link>

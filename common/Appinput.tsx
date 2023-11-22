@@ -18,7 +18,7 @@ type Props = {
   fullWidth: boolean;
   error: boolean;
   type: string | "number" | "password" | "text";
-  size: "small" | "medium" | TextFieldPropsSizeOverrides;
+  size: any;
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;

@@ -69,7 +69,7 @@ const Carditem: React.FC<Partial<adviserType>> = (props) => {
           container
           sx={{ width: { xs: "100%", sm: "80%", md: "60%" }, margin: "0 auto" }}
         >
-          {/* <Appbutton
+          <Appbutton
             onClick={() =>
               router.push({
                 pathname: `/product/[slug]`,
@@ -83,10 +83,10 @@ const Carditem: React.FC<Partial<adviserType>> = (props) => {
             variant="outlined"
           >
             {props.is_selled ? "درحال معامله " : "مشاهده جزییات"}
-          </Appbutton> */}
-          <Applink link={`/product/${props.id}`}>
+          </Appbutton>
+          {/* <Applink link={`/product/${props.id}`}>
             {props.is_selled ? "درحال معامله " : "مشاهده جزییات"}
-          </Applink>
+          </Applink> */}
         </Grid>
       </Grid>
     </Grid>

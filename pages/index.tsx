@@ -63,7 +63,6 @@ const Home = (): JSX.Element => {
           sx={{
             maxWidth: "100%",
             backgroundColor: `${theme.palette.primary.main}`,
-            // "linear-gradient(#f9fdfd,#ddf0f2)"
             p: 5,
             pb: 10,
           }}
@@ -115,16 +114,22 @@ const Home = (): JSX.Element => {
           }}
         >
           <Grid
-            item
+            container
             justifyContent={"space-between"}
             display={"flex"}
             sx={{
-              width: { md: "70%", xs: "100%" },
+              width: { md: "70%", xs: "95%" },
             }}
           >
             {iconbox_items.map((v: iconBox, i: number) => {
               return (
-                <Grid key={i} item md={3.8} sm={12}>
+                <Grid
+                  key={i}
+                  item
+                  md={3.8}
+                  sm={12}
+                  sx={{ mb: { sm: 8, md: 0, xs: 8 } }}
+                >
                   <Iconbox
                     title={v.title}
                     icon={v.icon}

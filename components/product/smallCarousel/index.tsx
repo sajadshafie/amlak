@@ -3,16 +3,20 @@ import React from "react";
 import { productImageSub } from "../CarouselItems/sub_carouselItems";
 import Carousel from "@/libs/Carousel";
 
-const SmallCarousel: React.FC<{
+type propsType = {
   onClickItem: Function;
   activeIndex: number;
-}> = (props) => {
+  data: any[];
+};
+
+const SmallCarousel: React.FC<Partial<propsType>> = (props) => {
   return (
     <Grid>
       <Carousel
+        height="150px"
         haveArrow
-        data={productImageSub}
-        slidesToShow={4}
+        data={props.data}
+        slidesToShow={props.data?.length >= 1 ? 2 : 1}
         dots={false}
         infinite={true}
         speed={500}

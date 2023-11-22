@@ -15,7 +15,6 @@ import ListTable from "@/libs/cardTable";
 import BackTo from "@/libs/BackTo";
 import SearchTable from "@/components/provider/SearchTable";
 import propsTypeSearch from "@/types/searchTable";
-import axios from "axios";
 
 export async function getServerSideProps(context: any) {
   if (!context.req.cookies.usertoken) {
@@ -43,7 +42,7 @@ type paginationProps = {
   pageSize: number;
 };
 
-const provider = (): JSX.Element => {
+const Provider = (): JSX.Element => {
   const media = useMediaQuery("(min-width:870px)");
   const [pagination, setPagination] = useState<paginationProps>({
     count: 0,
@@ -268,13 +267,52 @@ const provider = (): JSX.Element => {
 
   const GetData = async (query?: string) => {
     setListLoading("loading");
-    await axios
-      .get("Api/Advertisement/AdvancedSearch")
+    await api
+      .advertiseAdvanceSearch(query)
       .then((res) => {
-        console.log(res);
+        setPagination({
+          page: 1,
+          pageSize: res.data.pageSize,
+          count: Math.ceil(res.data.totalRecords / res.data.pageSize),
+        });
+        const response = res.data.result.map((v: adviserType, i: number) => {
+          console.log(global.statusResult(v.status));
+          const images =
+            v.images && v.images.length >= 1
+              ? v.images?.split(",").map((item: any) => `${imageURL + item}`)
+              : [];
+          return {
+            title: v.title,
+            meterage: v.meterage.toLocaleString("en-CA"),
+            address: "تهران - شهرری",
+            price: v.price.toLocaleString("en-CA"),
+            none: {
+              description: v.description,
+              id: v.id,
+              images: images,
+              category: v.category,
+            },
+            status: {
+              content: global.statusResult(v.status)?.status,
+              type: global.statusResult(v.status)?.type,
+              id: v.status,
+            },
+            button: [
+              {
+                title: "edit",
+              },
+              {
+                title: "delete",
+              },
+            ],
+          };
+        });
+        setData(response);
+        setListLoading("data");
       })
       .catch((err) => {
         console.log(err);
+        setListLoading("error");
       });
   };
 
@@ -324,15 +362,14 @@ const provider = (): JSX.Element => {
     setSearchField({ ...searchField, [type]: e.target.value });
   };
   const onClickSearchBar = () => {
-    GetData(
-      `${searchField.title ? `title=${searchField.title}` : ""} ${
-        searchField.status ? `&status=${searchField.status}` : ""
-      } ${
-        searchField.documentType
-          ? `&documentType=${searchField.documentType}`
-          : ""
-      }`
-    );
+    const query = `${searchField.title ? `title=${searchField.title}` : ""} ${
+      searchField.status ? `&status=${searchField.status}` : ""
+    } ${
+      searchField.documentType
+        ? `&documentType=${searchField.documentType}`
+        : ""
+    }`;
+    GetData(query.replace(/ +/g, ""));
   };
   useEffect(() => {
     GetData();
@@ -403,4 +440,4 @@ const provider = (): JSX.Element => {
   );
 };
 
-export default provider;
+export default Provider;

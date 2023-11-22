@@ -1,7 +1,7 @@
 export interface adviserType {
   title?: string;
   type?: string;
-  meterage?: string;
+  meterage?: string | number;
   location?: string;
   price_meter?: string;
   total_price?: string;

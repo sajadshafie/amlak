@@ -33,6 +33,7 @@ const Footer: React.FC = () => {
           px: { xs: 5, sm: 7, md: 9, xl: 11 },
           py: { xs: 5, sm: 7, md: 9, xl: 11 },
           width: { xs: "100%", sm: "70%", md: "60%" },
+          flexDirection: { xs: "column", sm: "row" },
         }}
         justifyContent={"space-between"}
       >
@@ -99,6 +100,7 @@ const Footer: React.FC = () => {
           left: 0,
           width: { xs: "100%", sm: "90%", md: "70%", xl: "750px" },
           marginRight: "auto",
+          display: { xs: "none", sm: "block" },
         }}
       >
         <Appimage src="/images/footer/footer.webp" />

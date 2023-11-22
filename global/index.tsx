@@ -1,3 +1,4 @@
+import { adviserType } from "@/types/addvertise";
 import style from "./style.module.scss";
 import { Grid } from "@mui/material";
 import moment from "jalali-moment";
@@ -130,6 +131,67 @@ export default {
       default:
         break;
     }
+    return res;
+  },
+
+  objectToArray: (object: adviserType) => {
+    const renderField = [
+      "description",
+      "documentType",
+      "category",
+      "title",
+      "status",
+      "registerDate",
+      "price",
+      "meterage",
+    ];
+    const ss = Object.entries(object);
+
+    const maper = ss.map((item) => {
+      if (renderField.includes(item[0])) {
+        return item;
+      }
+    });
+    const res = maper.filter((v) => v !== undefined);
+    return res;
+  },
+
+  convertLangueg: (text: string) => {
+    const words = [
+      {
+        label: "title",
+        value: "نام ملک",
+      },
+      {
+        label: "description",
+        value: "توضیحات",
+      },
+      {
+        label: "documentType",
+        value: "نوع ملک",
+      },
+      {
+        label: "status",
+        value: "وضعیت",
+      },
+      {
+        label: "category",
+        value: "دسته بندی",
+      },
+      {
+        label: "registerDate",
+        value: "تاریخ ثبت",
+      },
+      {
+        label: "price",
+        value: "قیمت",
+      },
+      {
+        label: "meterage",
+        value: "متراژ",
+      },
+    ];
+    const res = words.find((v) => v.label == text)?.value;
     return res;
   },
 };

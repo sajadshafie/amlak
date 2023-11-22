@@ -47,15 +47,25 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
           </Grid>
           {props.children}
           {props.text_is_register && (
-            <Typography mt={4} variant="h6">
-              {props.text_sub_register}{" "}
+            <Grid container alignItems={"center"} mt={4}>
+              <Typography variant="h5" ml={1}>
+                {props.text_sub_register}
+              </Typography>
               <Applink link={props.link}>{props.text_is_register} </Applink>
-            </Typography>
+            </Grid>
           )}
-          <Typography mt={4} variant="h6">
+          <Typography mt={4} variant="h5">
             ورود شما به معنای پذیرش{" "}
-            {<Applink link="/">{"شرایط  تالار ملک"}</Applink>} و{" "}
-            <Applink link="/">{"قوانین و حریم خصوصی"}</Applink> است
+            {
+              <Applink style={{ display: "inline" }} link="/">
+                {"شرایط  تالار ملک"}
+              </Applink>
+            }{" "}
+            و{" "}
+            <Applink style={{ display: "inline" }} link="/">
+              {"قوانین و حریم خصوصی"}
+            </Applink>{" "}
+            است
           </Typography>
         </Grid>
 

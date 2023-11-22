@@ -249,8 +249,8 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
             </TableRow>
           </TableHead>
 
-          {props.isLoading !== "data" ? (
-            <Process loading={props.isLoading} />
+          {props.isLoading !== "data" || props.rows?.length == 0 ? (
+            <Process loading={props.isLoading} data={props.rows} />
           ) : (
             <TableBody>
               {props.rows &&

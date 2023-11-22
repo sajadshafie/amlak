@@ -45,4 +45,5 @@ export default {
   deleteImage: (id, image) => {
     return config.delete(`Api/Image/${id}/Delete?images=${image}`);
   },
+
 };

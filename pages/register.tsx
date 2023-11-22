@@ -1,7 +1,7 @@
 import AuthLayout from "@/Layout/authLayout";
 import React, { useState } from "react";
 import Registerform from "@/components/UserAuth/Registerform";
-import { step_auth_register } from "@/global";
+import global from "@/global";
 import { formType, confirmType } from "@/types/authType";
 import ConfirmCode from "@/components/UserAuth/ConfirmCode";
 
@@ -22,7 +22,7 @@ const Register = (): JSX.Element => {
           ? "لطفا اطلاعات خواسته شده را تکمیل و بعد از ثبت آن منتطر ارسال کد پیامکی بمانید."
           : "لطفا کد پیامک شده به شماره موبایل ۱۲۳۴۵۶۷۸۹ را وارد کنید."
       }
-      step={step_auth_register}
+      step={global.step_auth_register}
     >
       {activeStep == 0 ? (
         <Registerform onSubmit={(form) => onSubmit(form, "register")} />

@@ -6,15 +6,15 @@ export interface ButtonPropsVariantOverrides {}
 interface Props {
   children: ReactNode;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  type: string;
+  type: any;
   loading: boolean;
   sx: object | React.CSSProperties;
-  variant: "text" | "outlined" | "contained" | string;
+  variant: any;
   color: string;
   fullWidth: boolean;
   disabled: boolean;
   ariadescribedby: any;
-  textVariant: string;
+  textVariant: any;
 }
 
 const Appbutton: React.FC<Partial<Props>> = (props) => {

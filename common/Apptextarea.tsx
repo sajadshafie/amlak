@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import style from "./style.module.scss";
 
 type propsType = {
@@ -6,7 +6,7 @@ type propsType = {
   cols: number;
   placeholder: string;
   value: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const AppTextArea: React.FC<Partial<propsType>> = (props) => {
@@ -16,7 +16,7 @@ const AppTextArea: React.FC<Partial<propsType>> = (props) => {
       cols={props.cols}
       className={style.text_area}
       placeholder={props.placeholder}
-      onChange={props.onChange}
+      onChange={(e) => props.onChange && props.onChange(e)}
       value={props.value}
     />
   );
