@@ -17,13 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "palette/typography.js",
-    "themes/compStyleOverride.js",
-    "libs/AppTextvalidator/index.js"
-, "pages/product/[slug].js"  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

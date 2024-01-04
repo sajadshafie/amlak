@@ -2,7 +2,15 @@
  * Typography used in theme
  * @param {JsonObject} theme theme customization object
  */
-
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    h6w: true;
+    h8: true;
+    h7: true;
+    h5w: true;
+    h5number:true
+  }
+}
 export default function themeTypography(theme: any) {
   return {
     direction: "rtl",

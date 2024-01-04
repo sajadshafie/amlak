@@ -179,6 +179,7 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
   };
 
   const handleExcelDownload = () => {
+    //@ts-ignore
     const myarr: any[] =
       props.rows &&
       props.rows
@@ -206,8 +207,10 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
 
   const saveAsExcel = (buffer: any, fileName: any) => {
     const data = new Blob([buffer], { type: "application/octet-stream" });
+    //@ts-ignore
     if (typeof window.navigator.msSaveBlob === "function") {
       // For IE and Edge
+      //@ts-ignore
       window?.navigator?.msSaveBlob(data, fileName);
     } else {
       const url = window.URL.createObjectURL(data);
@@ -224,6 +227,7 @@ const AppTable: React.FC<Partial<propsType>> = (props) => {
       {/* Start Table Container */}
       <TableContainer
         sx={{ width: { xs: "97%", sm: "100%" }, margin: "8px auto" }}
+        //@ts-ignore
         style={{ borderRadius: borderRadius, mb: 2 }}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

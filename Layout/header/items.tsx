@@ -42,7 +42,7 @@ const Items = [
   {
     title: "مشاهده املاک",
     id: 5,
-    link: "/",
+    link: "/viewall",
   },
 ];
 

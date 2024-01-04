@@ -43,14 +43,7 @@ const DrawerMenu: React.FC<propsType> = (props) => {
             mt: 2,
           }}
         >
-          {/* <Grid
-            sx={{ position: "absolute", left: "10px", top: "-10px" }}
-            onClick={props.onClose && props.onClose}
-          >
-            <IconButton>
-              <CloseIcon />
-            </IconButton>
-          </Grid> */}
+          
           {Items.map((v: Menu, index: number) => (
             <ListItem
               key={index}

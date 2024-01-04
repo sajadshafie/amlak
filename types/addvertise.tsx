@@ -17,4 +17,5 @@ export interface adviserType {
   price?: number | null;
   shamim?: string;
   images?: any[] | string;
+  is_selled: boolean;
 }

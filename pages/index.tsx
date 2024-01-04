@@ -25,24 +25,23 @@ const Home = (): JSX.Element => {
     "loading"
   );
   const [advertising, setAdvertising] = useState<adviserType[]>([]);
-
+  const theme = useTheme();
+  const getData = async () => {
+    setProcess("loading");
+    api
+      .getAdvertiseList()
+      .then(async (res) => {
+        setProcess("data");
+        // console.log(res);
+        await setAdvertising(res.data.result);
+      })
+      .catch((err) => {
+        setProcess("error");
+      });
+  };
   useEffect(() => {
-    const getData = async () => {
-      setProcess("loading");
-      api
-        .getAdvertiseList()
-        .then(async (res) => {
-          setProcess("data");
-          // console.log(res);
-          await setAdvertising(res.data.result);
-        })
-        .catch((err) => {
-          setProcess("error");
-        });
-    };
     getData();
   }, []);
-  const theme = useTheme();
 
   return (
     <>

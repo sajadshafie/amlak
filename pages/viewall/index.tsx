@@ -13,7 +13,7 @@ const Viewall: React.FC = () => {
   const getData = () => {
     setProcess("loading");
     api
-      .advertiseAdvanceSearch()
+      .advertiseAdvanceSearch("status=2")
       .then((res) => {
         setData(res.data.result);
         setProcess("data");
@@ -27,7 +27,7 @@ const Viewall: React.FC = () => {
     getData();
   }, []);
   return (
-    <Main>
+    <Main active={5}>
       <ProccessLoading process={process}>
         <Product data={data} title="مشاهده همه املاک" />
       </ProccessLoading>

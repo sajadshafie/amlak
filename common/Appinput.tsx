@@ -24,6 +24,7 @@ const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
 const themes = createTheme({
   direction: "rtl",
+  //@ts-ignore
   typography: themeTypography(ColorTypography),
   components: {
     MuiInputLabel: {
