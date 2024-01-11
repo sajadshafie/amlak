@@ -16,7 +16,7 @@ const SmallCarousel: React.FC<Partial<propsType>> = (props) => {
         height="150px"
         haveArrow
         data={props.data}
-        slidesToShow={props.data?.length >= 1 ? 2 : 1}
+        slidesToShow={props.data?.length > 1 ? 2 : 1}
         dots={false}
         infinite={true}
         speed={500}

@@ -32,6 +32,7 @@ const Product: React.FC<{ props: any }> = (props) => {
     "loading"
   );
   const [image, setImages] = useState<string>([]);
+  //@ts-ignore
   const [detail, setDetail] = useState<adviserType>({
     price: 0,
     description: "",
@@ -98,7 +99,7 @@ const Product: React.FC<{ props: any }> = (props) => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(detail);
+  console.log(image);
   return (
     <Main active={5}>
       <ProccessLoading process={process}>

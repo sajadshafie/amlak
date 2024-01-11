@@ -16,6 +16,7 @@ const Advertise_detail: React.FC = () => {
   const { state, setState } = useContext(context);
   const theme = useTheme();
   const router = useRouter();
+  //@ts-ignore
   const [data, setData] = useState<adviserType>({
     category: 0,
     description: "",
@@ -33,17 +34,20 @@ const Advertise_detail: React.FC = () => {
   const getData = () => {
     setProcess("loading");
     api
-      .getAdvertiseList(true, router.query.index)
+      .getAdvertiseList(`id=${router.query.index}`)
       .then((res) => {
         console.log(res);
         setData({
           ...res.data.result,
-          images: res.data.result.images.split(","),
+          images: res.data.result?.images
+            ? res.data.result?.images?.split(",")
+            : [],
         });
 
         setProcess("data");
       })
       .catch((err) => {
+        console.log(err);
         setProcess("error");
       });
   };
@@ -69,31 +73,33 @@ const Advertise_detail: React.FC = () => {
           </Grid>
           <Grid>
             <Grid mb={2}>
-              <Typography variant="h4" mb={1}>
+              <Typography variant="h4" mb={2}>
                 تصاویر
               </Typography>
               <Grid container spacing={2}>
-                {data.images.map((v: string, i: number) => {
-                  return (
-                    <Grid
-                      sx={{}}
-                      key={i}
-                      item
-                      md={4}
-                      sm={6}
-                      xs={12}
-                      height={"175px"}
-                    >
-                      <Appimage
-                        style={{
-                          borderRadius: "12px",
-                          boxShadow: state.boxShadow,
-                        }}
-                        src={imageURL + v}
-                      />
-                    </Grid>
-                  );
-                })}
+                {data?.images?.length >= 1
+                  ? data.images?.map((v: string, i: number) => {
+                      return (
+                        <Grid
+                          sx={{}}
+                          key={i}
+                          item
+                          md={4}
+                          sm={6}
+                          xs={12}
+                          height={"175px"}
+                        >
+                          <Appimage
+                            style={{
+                              borderRadius: "12px",
+                              boxShadow: state.boxShadow,
+                            }}
+                            src={imageURL + v}
+                          />
+                        </Grid>
+                      );
+                    })
+                  : "تصویری موجود نیست"}
               </Grid>
             </Grid>
             <Typography mb={1} variant="h4">

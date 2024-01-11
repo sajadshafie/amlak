@@ -1,7 +1,7 @@
 export interface adviserType {
   title?: string;
   type?: string;
-  meterage?: string | number;
+  meterage?: string | number | null;
   location?: string;
   price_meter?: string;
   total_price?: string;
@@ -14,8 +14,8 @@ export interface adviserType {
   long?: string;
   id?: number;
   userId?: number;
-  price?: number | null;
+  price?: number | string | null;
   shamim?: string;
-  images?: any[] | string;
+  images?: any[] | any;
   is_selled: boolean;
 }
