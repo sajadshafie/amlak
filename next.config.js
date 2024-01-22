@@ -9,6 +9,7 @@ const nextConfig = {
   },
   swcMinify: false,
   images: {
+    unoptimized:true,
     domains: ["cdn.talaremelk.ir"],
   },
   async rewrites() {
