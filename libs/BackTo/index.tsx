@@ -13,7 +13,7 @@ type propstype = {
 const BackTo: React.FC<propstype> = (props) => {
   const router = useRouter();
   const onBack = () => {
-    props.isBack ? router.back() : router.push(props.link);
+    props.isBack ? router.back() : router.push(props.link as string);
   };
   const theme = useTheme();
   return (

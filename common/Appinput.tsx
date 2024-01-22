@@ -10,15 +10,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 // TextFieldPropsSizeOverrides
 import { TextFieldPropsSizeOverrides } from "@mui/material";
 type Props = {
+  name: string;
   label: string;
   variant: "standard" | "outlined" | "filled";
   value: string;
-  onChange: () => void;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   sx: React.CSSProperties | object;
   fullWidth: boolean;
   error: boolean;
   type: string | "number" | "password" | "text";
   size: any;
+  helperText?: string;
+  inputProps: any;
 };
 const theme = ColorTypography();
 const bgColor = theme.colors?.grey50;
@@ -86,6 +89,8 @@ const Appinput: React.FC<Partial<Props>> = (props) => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={themes}>
         <TextField
+          inputProps={props.inputProps}
+          helperText={props.helperText}
           type={props.type}
           error={props.error}
           fullWidth={props.fullWidth}

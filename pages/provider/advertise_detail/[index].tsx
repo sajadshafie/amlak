@@ -128,7 +128,7 @@ const Advertise_detail: React.FC = () => {
                 متراژ :
               </Typography>
               <Typography fontWeight={"bold"} variant="h5">
-                {data.meterage.toLocaleString("en-CA")} متر
+                {data?.meterage?.toLocaleString("en-CA")} متر
               </Typography>
             </Grid>
             <Grid display={"flex"} mb={1}>
@@ -142,7 +142,7 @@ const Advertise_detail: React.FC = () => {
                 نوع سند :
               </Typography>
               <Typography variant="h5" fontWeight={"bold"}>
-                {global.documnetTypeHandler(data.documentType)}
+                {global?.documnetTypeHandler(data?.documentType as number)}
               </Typography>
             </Grid>
             <Grid display={"flex"} mb={1}>
@@ -155,7 +155,7 @@ const Advertise_detail: React.FC = () => {
                 نوع ملک :
               </Typography>
               <Typography fontWeight={"bold"} variant="h5">
-                {global.categoryHandler(data.category)}
+                {global.categoryHandler(data?.category as number)}
               </Typography>
             </Grid>
             <Grid display={"flex"} alignItems={"center"} mb={1}>
@@ -168,8 +168,8 @@ const Advertise_detail: React.FC = () => {
                 وضعیت :
               </Typography>
               {global.statusHandler(
-                global.statusResult(data.status)?.type,
-                global.statusResult(data.status)?.status
+                global?.statusResult(data.status)?.type as string,
+                global?.statusResult(data.status)?.status as string
               )}
             </Grid>
             <Grid display={"flex"} mb={1}>
@@ -182,7 +182,7 @@ const Advertise_detail: React.FC = () => {
                 تاریخ ثبت :
               </Typography>
               <Typography fontWeight={"bold"} variant="h5">
-                {global.convertPersianDate(data.registerDate)}
+                {global.convertPersianDate(data.registerDate as string)}
               </Typography>
             </Grid>
             <Grid display={"flex"} mb={1}>
@@ -195,7 +195,7 @@ const Advertise_detail: React.FC = () => {
                 قیمت :
               </Typography>
               <Typography fontWeight={"bold"} variant="h5">
-                {data.price.toLocaleString("en-CA")} تومان
+                {data?.price?.toLocaleString("en-CA")} تومان
               </Typography>
             </Grid>
             <Grid display={"flex"} mb={1}>

@@ -16,6 +16,6 @@ export interface adviserType {
   userId?: number;
   price?: number | string | null;
   shamim?: string;
-  images?: any[] | any;
-  is_selled: boolean;
+  images?: any;
+  is_selled?: boolean;
 }

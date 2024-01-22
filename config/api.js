@@ -16,7 +16,6 @@ export default {
   login: (body) => {
     return config.post("api/User/Login", body);
   },
-
   //##########  ADVERTISE START ###############
   advertiseAdvanceSearch: (query) => {
     return config.get(
@@ -45,5 +44,4 @@ export default {
   deleteImage: (id, image) => {
     return config.delete(`Api/Image/${id}/Delete?images=${image}`);
   },
-
 };

@@ -84,7 +84,7 @@ const Provider = (): JSX.Element => {
   });
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState<string | null>("");
-  const [imagesRemoved, setImagesRemoved] = useState<string[]>([]);
+  const [imagesRemoved, setImagesRemoved] = useState<string[] | object[]>([]);
   const ImageToformdata = (array: any) => {
     const fd = array?.map((v: any) => v.file);
     const formdata = new FormData();
@@ -98,7 +98,6 @@ const Provider = (): JSX.Element => {
     setForm({
       meterage: "",
       price: null,
-      status: 0,
       title: "",
       id: 0,
       description: "",
@@ -118,7 +117,9 @@ const Provider = (): JSX.Element => {
   };
 
   const updateAddImage = async () => {
-    const filter = await form.images?.filter((v) => typeof v !== "string");
+    const filter = await form.images?.filter(
+      (v: string | object) => typeof v !== "string"
+    );
     if (filter.length >= 1) {
       api
         .uploadImageAdd(form.id, ImageToformdata(filter))
@@ -189,7 +190,7 @@ const Provider = (): JSX.Element => {
       });
   };
 
-  const removeImage = (id?: number, name?: string | string[]) => {
+  const removeImage = (id?: number, name?: string | string[] | object[]) => {
     console.log(id, name);
     api
       .deleteImage(id, name)
@@ -208,7 +209,7 @@ const Provider = (): JSX.Element => {
         ...form,
         images: img,
       });
-      await setImagesRemoved((state) => [...state, confirmDetail.name]);
+      await setImagesRemoved((state: any) => [...state, confirmDetail.name]);
       setConfirmDetail({
         index: null,
         isOpen: false,
@@ -224,8 +225,8 @@ const Provider = (): JSX.Element => {
     api
       .insertAdvertise({
         ...form,
-        price: global.DecimalToNumber(form.price),
-        meterage: global.DecimalToNumber(form.meterage),
+        price: global.DecimalToNumber(form.price as string),
+        meterage: global.DecimalToNumber(form.meterage as string),
       })
       .then((res) => {
         addImage(res.data.result, ImageToformdata(form.images));
@@ -241,8 +242,8 @@ const Provider = (): JSX.Element => {
       .updateAdvertise(form.id, {
         ...form,
         shamim: "4",
-        price: global.DecimalToNumber(form.price),
-        meterage: global.DecimalToNumber(form.meterage),
+        price: global.DecimalToNumber(form.price as string),
+        meterage: global.DecimalToNumber(form.meterage as string),
       })
       .then(async (res) => {
         imagesRemoved.length >= 1 &&
@@ -283,9 +284,9 @@ const Provider = (): JSX.Element => {
               : [];
           return {
             title: v.title,
-            meterage: v.meterage.toLocaleString("en-CA"),
+            meterage: v.meterage?.toLocaleString("en-CA"),
             address: "تهران - شهرری",
-            price: v.price.toLocaleString("en-CA"),
+            price: v.price?.toLocaleString("en-CA"),
             none: {
               description: v.description,
               id: v.id,
@@ -353,7 +354,7 @@ const Provider = (): JSX.Element => {
   };
 
   const onPagination = (e: any, value: number) => {
-    GetData(true, value);
+    GetData();
   };
   const onChangeSearchBar = (
     e: ChangeEvent<HTMLInputElement>,

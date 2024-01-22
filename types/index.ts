@@ -33,4 +33,13 @@ export declare namespace GlobalTypes {
     liked: boolean;
     is_selled: boolean;
   }
+  interface formType {
+    require: boolean;
+    name: string;
+    label: string;
+    pattern: string;
+    requireMessage: string;
+    patternMessage: string;
+    inputBuilder: number;
+  }
 }

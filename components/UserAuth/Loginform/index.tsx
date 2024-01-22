@@ -55,7 +55,7 @@ const Loginform: React.FC = () => {
       .catch((err) => {
         console.log(err);
         setLoading(false);
-        toast.error(Text.errorLogin);
+        // toast.error(Text.errorLogin);
       });
   };
 
