@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
   return (
     <>
       <Main active={1}>
-        <AdverImage search />
+        <AdverImage ImageSrc="/images/city.jpeg" search />
 
         <Grid
           sx={{
