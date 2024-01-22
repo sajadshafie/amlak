@@ -17,6 +17,7 @@ const Appimage: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid position={"relative"} sx={{ width: "100%", height: "100%" }}>
       <Image
+        unoptimized
         className={props.className}
         style={props.style}
         src={props.src}
