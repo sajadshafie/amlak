@@ -13,7 +13,7 @@ type Props = {
 const AdverImage: React.FC<Partial<Props>> = (props) => {
   return (
     <Grid sx={{ position: "relative" }}>
-      <Grid sx={{ height: "650px", width: "100%" }}>
+      <Grid sx={{ height: "250px", width: "500px" }}>
         <Appimage src={props.ImageSrc} alt="/" />
       </Grid>
       <Grid
