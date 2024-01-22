@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
   return (
     <>
       <Main active={1}>
-        <AdverImage ImageSrc="/images/city2.jpg" search />
+        <AdverImage ImageSrc="/images/main.webp" search />
         <Grid
           sx={{
             maxWidth: state.maxWidth,
