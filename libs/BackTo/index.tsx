@@ -1,12 +1,11 @@
 import { Grid, Typography, useTheme } from "@mui/material";
 import React from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import Applink from "@/common/Applink";
 import { useRouter } from "next/router";
 type propstype = {
   title?: string;
   link?: string;
-  isBack: boolean;
+  isBack?: boolean;
   router?: any;
 };
 

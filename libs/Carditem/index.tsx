@@ -14,7 +14,7 @@ const Carditem: React.FC<Partial<adviserType>> = (props) => {
   const hanldeLike = () => {};
   const router = useRouter();
   const ss = typeof props.images == "string" ? props.images.split(",") : [];
-  const main = ss.find((v: string) => v.includes("main"));
+  const main:any = ss.find((v: string) => v.includes("main"));
   return (
     <Grid
       sx={{
@@ -51,13 +51,13 @@ const Carditem: React.FC<Partial<adviserType>> = (props) => {
             {props.title}
           </Typography>
           <Typography fontWeight={"400"} variant="h5number">
-            {props.meterage.toLocaleString("fi-FI")} متر
+            {props.meterage?.toLocaleString("fi-FI")} متر
           </Typography>
         </Grid>
         <Grid display={"flex"} justifyContent={"space-between"}>
           <Typography variant="caption"> موقیت مکانی تهران</Typography>
           <Typography variant="h5">
-            نوع سند {global.documnetTypeHandler(props.documentType)}
+            نوع سند {global.documnetTypeHandler(props.documentType as number)}
           </Typography>
         </Grid>
         <Grid mb={2}>

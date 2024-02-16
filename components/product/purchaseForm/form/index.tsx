@@ -7,12 +7,17 @@ import Applink from "@/common/Applink";
 import AppSelectValidator from "@/libs/AppSelectValidator";
 import { city } from "@/global/city";
 import { formType } from "@/types/authType";
+import api from "@/config/api";
+import { useRouter } from "next/router";
+import { StatusAddvertising } from "@/enum";
+import { toast } from "react-toastify";
 
 type propsType = {
   onSubmit: (form: formType) => void;
 };
 
-const Registerform: React.FC<Partial<propsType>> = (props) => {
+const FormPurchase: React.FC<Partial<propsType>> = (props) => {
+  const router = useRouter();
   const [form, setForm] = useState<formType>({
     phone_number: "",
     name_family: "",
@@ -29,8 +34,18 @@ const Registerform: React.FC<Partial<propsType>> = (props) => {
       [type]: value,
     });
   };
-  const onSubmitForm = () => {
-    props.onSubmit && props.onSubmit(form);
+  const handleChangestatus = () => {
+    api
+      .changeStatus(router.query.slug, StatusAddvertising.Negotiating)
+      .then((res) => {
+        toast.success("ملک در حالت معامله قرار گرفت");
+        setTimeout(() => {
+          router.push("/provider/purchased");
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const errMessage: string[] = ["این فیلد نمیتواند خالی باشد"];
   const require: string[] = ["required"];
@@ -48,7 +63,7 @@ const Registerform: React.FC<Partial<propsType>> = (props) => {
   });
 
   return (
-    <ValidatorForm ref={refForm} onSubmit={onSubmitForm}>
+    <ValidatorForm ref={refForm} onSubmit={handleChangestatus}>
       <Grid mb={2}>
         <AppTextValidator
           type="number"
@@ -113,47 +128,11 @@ const Registerform: React.FC<Partial<propsType>> = (props) => {
           value={form.address}
         />
       </Grid>
-      <Grid mb={2}>
-        <AppTextValidator
-          fullWidth
-          type={"password"}
-          validators={require}
-          errorMessages={errMessage}
-          label={"رمز عبور*"}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChangeForm(e.target.value, "password")
-          }
-          value={form.password}
-        />
-      </Grid>
-      <Grid mb={2}>
-        <AppTextValidator
-          type={"password"}
-          fullWidth
-          validators={require}
-          errorMessages={["required", "isPasswordMatch"]}
-          label={"تکرار رمز عبور*"}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChangeForm(e.target.value, "re_password")
-          }
-          value={form.re_password}
-        />
-      </Grid>
-
-      <Grid
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Appbutton type="submit" variant="contained">
-          ثبت نام
-        </Appbutton>
-        <Applink link="/forgotpassword">
-          {"رمز عبور خود را فراموش کرده اید؟"}
-        </Applink>
-      </Grid>
+      <Appbutton type="submit" variant="contained">
+        تایید و اتصال به درگاه پرداخت
+      </Appbutton>
     </ValidatorForm>
   );
 };
 
-export default Registerform;
+export default FormPurchase;

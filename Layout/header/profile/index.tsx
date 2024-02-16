@@ -10,11 +10,11 @@ const Profile: React.FC<{ isLoging?: boolean }> = (props) => {
   ];
   const listNotLogin = [
     {
-      text: "ثبت نام فروشنده",
+      text: "ثبت نام ",
       link: "/register",
     },
     {
-      text: "ورود فروشنده",
+      text: "ورود به حساب کاربری",
       link: "/login",
     },
   ];

@@ -2,6 +2,7 @@ import { adviserType } from "@/types/addvertise";
 import style from "./style.module.scss";
 import { Grid } from "@mui/material";
 import moment from "jalali-moment";
+import { CategoryAddvertising, StatusAddvertising } from "@/enum";
 export default {
   statusHandler: (type: string, content: string) => {
     return (
@@ -24,40 +25,40 @@ export default {
   statusResult: (status_number?: 0 | 1 | 2 | 3 | 4 | 5) => {
     let res;
     switch (status_number) {
-      case 0:
+      case StatusAddvertising.unknow:
         res = {
           status: "معلق",
           type: "unknow",
         };
         break;
-      case 1:
+      case StatusAddvertising.pendding:
         res = {
           status: "درحال انتظار",
           type: "pendding",
         };
         break;
-      case 2:
+      case StatusAddvertising.success:
         res = {
           status: "تایید شده",
           type: "success",
         };
         break;
-      case 3:
+      case StatusAddvertising.error:
         res = {
           status: "رد شده",
           type: "error",
         };
         break;
-      case 4:
+      case StatusAddvertising.trading:
+        res = {
+          status: "درحال معامله",
+          type: "trading",
+        };
+        break;
+      case StatusAddvertising.sold:
         res = {
           status: "فروخته شده",
           type: "sold",
-        };
-        break;
-      case 5:
-        res = {
-          status: "لغو شده",
-          type: "cancel",
         };
         break;
     }
@@ -119,13 +120,13 @@ export default {
   categoryHandler: (number: number) => {
     let res;
     switch (number) {
-      case 0:
+      case CategoryAddvertising.unknow:
         res = "نا مشخص";
         break;
-      case 1:
+      case CategoryAddvertising.Earth:
         res = "زمین";
         break;
-      case 2:
+      case CategoryAddvertising.Apartment:
         res = "آپارتمان";
         break;
 

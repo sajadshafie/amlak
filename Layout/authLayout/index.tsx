@@ -39,9 +39,16 @@ const AuthLayout: React.FC<Partial<authLayoutType>> = (props) => {
             </Grid>
           )}
 
-          <Typography variant="h3" mb={2} textAlign={"right"}>
-            {props.title}
-          </Typography>
+          <Grid
+            container
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Typography variant="h3" mb={2} textAlign={"right"}>
+              {props.title}
+            </Typography>
+            <Applink link={"/"}>بازگشت به سایت</Applink>
+          </Grid>
           <Grid mb={2}>
             <Typography variant="caption">{props.sub_title}</Typography>
           </Grid>

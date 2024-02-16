@@ -14,24 +14,22 @@ import Addcompany from "@/libs/addCompany";
 import { adviserType } from "@/types/addvertise";
 import Appimage from "@/common/Appimage";
 import api from "@/config/api";
-import ProcessPage from "@/libs/ProcessPage";
 import ProccessLoading from "@/libs/processloading";
 import global from "@/global";
 import { imageURL } from "@/config/global";
-
-type detailType = {
-  label: string;
-  value: string;
-  is_price?: boolean;
-  id: number;
-};
+import Cookies from "js-cookie";
+import Regulation from "@/global/regulation";
+import { toast } from "react-toastify";
+import { StatusAddvertising } from "@/enum";
 
 const Product: React.FC<{ props: any }> = (props) => {
   const router = useRouter();
   const [process, setProcess] = useState<"loading" | "error" | "data">(
     "loading"
   );
-  const [image, setImages] = useState<string>([]);
+  const [stepRegulation, setStepRegulation] = useState<number>(1);
+  const [isViewRules, setisViewRules] = useState<boolean>(false);
+  const [image, setImages] = useState<string | []>([]);
   //@ts-ignore
   const [detail, setDetail] = useState<adviserType>({
     price: 0,
@@ -73,14 +71,16 @@ const Product: React.FC<{ props: any }> = (props) => {
       ? (sliderRef.current?.slickPrev(), handlerSlide(e))
       : (sliderRef.current?.slickNext(), handlerSlide(e));
   };
-
+  const onOpenRules = () => {
+    setisViewRules(true);
+  };
   const getData = () => {
     setProcess("loading");
     api
       .getAdvertiseList(`id=${router.query.slug}`)
       .then(async (res) => {
-        const imageArr = res.data.result.images.split(",");
-        const imageEl = imageArr.map((v: string, i: number) => {
+        const imageArr = res.data.result?.images?.split(",");
+        const imageEl = imageArr?.map((v: string, i: number) => {
           return {
             id: i,
             element: elementImage(v),
@@ -96,13 +96,40 @@ const Product: React.FC<{ props: any }> = (props) => {
         setProcess("error");
       });
   };
+
+  const onSubmitRegulation = () => {
+    if (stepRegulation == 2) {
+      if (Cookies.get("usertoken")) {
+        router.push(`/product/form/${router.query.slug}`);
+      } else {
+        toast.warning("ابتدا وارد شوید");
+      }
+    } else {
+      setStepRegulation(2);
+    }
+  };
   useEffect(() => {
     getData();
-  }, []);
-  console.log(image);
+  }, [router.query.slug]);
+
   return (
     <Main active={5}>
       <ProccessLoading process={process}>
+        {/* <ModalRules open={isViewRules} onClose={() => setisViewRules(false)} /> */}
+        <Regulation
+          title={stepRegulation == 1 ? "قوانین و مقررات آگهی" : undefined}
+          onSubmit={onSubmitRegulation}
+          textButton={
+            stepRegulation == 2
+              ? "تایید و اتصال به درگاه"
+              : "مشاهده قوانین سایت "
+          }
+          open={isViewRules}
+          onClose={() => {
+            setisViewRules(false);
+            setStepRegulation(1);
+          }}
+        />
         <Grid
           container
           justifyContent={"space-between"}
@@ -141,8 +168,12 @@ const Product: React.FC<{ props: any }> = (props) => {
               <Appbutton variant="contained" sx={{ ml: 2 }} textVariant="h5">
                 اطلاعات تماس
               </Appbutton>
-              <Appbutton variant="outlined" textVariant="h5">
-                درباره تالار ملک
+              <Appbutton
+                onClick={onOpenRules}
+                variant="outlined"
+                textVariant="h5"
+              >
+                مشاهده قوانین آگهی
               </Appbutton>
             </Grid>
             <Grid mb={4}>
@@ -160,7 +191,9 @@ const Product: React.FC<{ props: any }> = (props) => {
               <React.Fragment>
                 <Detailitem
                   label={"documentType"}
-                  value={global.documnetTypeHandler(detail.documentType)}
+                  value={global.documnetTypeHandler(
+                    detail.documentType as number
+                  )}
                 />
                 <Divider sx={{ my: 1.5 }} />
               </React.Fragment>
@@ -174,14 +207,16 @@ const Product: React.FC<{ props: any }> = (props) => {
               <React.Fragment>
                 <Detailitem
                   label={"category"}
-                  value={global.categoryHandler(detail.category)}
+                  value={global.categoryHandler(detail.category as number)}
                 />
                 <Divider sx={{ my: 1.5 }} />
               </React.Fragment>
               <React.Fragment>
                 <Detailitem
                   label={"registerDate"}
-                  value={global.convertPersianDate(detail.registerDate)}
+                  value={global.convertPersianDate(
+                    detail.registerDate as string
+                  )}
                 />
                 <Divider sx={{ my: 1.5 }} />
               </React.Fragment>
@@ -189,7 +224,9 @@ const Product: React.FC<{ props: any }> = (props) => {
             <Typography mb={2} variant="h4">
               توضیحات
             </Typography>
-            <Typography variant="h5">{detail.description}</Typography>
+            <Typography variant="h5" mb={4}>
+              {detail.description}
+            </Typography>
           </Grid>
 
           <Grid item md={5.9} xs={12}>
@@ -207,11 +244,13 @@ const Product: React.FC<{ props: any }> = (props) => {
                 initialSlide={0}
               />
             </Grid>
-            <SmallCarousel
-              data={image}
-              activeIndex={activeIndex}
-              onClickItem={onClickItem}
-            />
+            {image.length !== 1 && (
+              <SmallCarousel
+                data={image as any}
+                activeIndex={activeIndex}
+                onClickItem={onClickItem}
+              />
+            )}
             <Grid height={"250px"} mt={6} mb={4}>
               <Typography variant="h4" mb={2}>
                 محل ملک روی نقشه

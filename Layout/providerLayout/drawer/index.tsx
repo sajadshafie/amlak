@@ -11,7 +11,7 @@ const AppDrawer: React.FC<Partial<propstype>> = (props) => {
   return (
     <Grid
       sx={{
-        width: props.open ? "200px" : "0px",
+        width: props.open ? "250px" : "0px",
         backgroundColor: theme.palette.primary.main,
         borderRadius: "12px",
         p: props.open ? 1 : 0,

@@ -22,7 +22,11 @@ export default {
       `Api/Advertisement/AdvancedSearch${query ? `?${query}` : ""}`
     );
   },
-
+  changeStatus: (id, status) => {
+    return config.get(
+      `Api/Advertisement/${id}/change-status?newstatus=${status}`
+    );
+  },
   getAdvertiseList: (query) => {
     return config.get(`Api/Advertisement/Get${query ? `?${query}` : ""}`);
   },

@@ -10,7 +10,7 @@ type Menu = {
 };
 
 type propsType = {
-  active: boolean;
+  active: number;
 };
 
 const Listrender: React.FC<Partial<propsType>> = (props) => {

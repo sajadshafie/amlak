@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Typography,
@@ -21,6 +21,7 @@ type Props = {
 };
 
 const Header: React.FC<Partial<Props>> = (props) => {
+  const [isLogin, setIslogin] = useState<boolean>(false);
   const theme = useTheme();
   const query = useMediaQuery("(min-width:1055px)");
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -36,11 +37,11 @@ const Header: React.FC<Partial<Props>> = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const checkLogin = async () => {
-    const isLoging: boolean =
-      (await typeof Cookies.get("usertoken")) == "string";
-    return isLoging;
-  };
+
+  useEffect(() => {
+    Cookies.get("usertoken") ? setIslogin(true) : setIslogin(false);
+  }, []);
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
@@ -90,7 +91,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
           >
             <PersonIcon sx={{ fontSize: "25px" }} />
             <Typography variant="caption" className="text_transition_sub">
-              {checkLogin() ? "حساب کاربری" : "ورود"}
+              {isLogin ? "حساب کاربری" : "ورود"}
             </Typography>
           </Grid>
           {/* <Appbutton variant="contained">ثبت اگهی</Appbutton> */}
@@ -109,7 +110,7 @@ const Header: React.FC<Partial<Props>> = (props) => {
             horizontal: "left",
           }}
         >
-          <Profile isLoging={checkLogin()} />
+          <Profile isLoging={isLogin} />
         </Popover>
       </Grid>
     </Grid>

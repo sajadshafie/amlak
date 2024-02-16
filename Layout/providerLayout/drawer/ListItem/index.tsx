@@ -7,6 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -30,13 +31,13 @@ const ListItemApp: React.FC<Partial<propstype>> = (props) => {
   const Items: itemTypes[] = [
     {
       title: "اگهی",
-      link: "",
+      link: "/provider",
       id: 1,
       icon: <MailIcon sx={{ color: "white" }} />,
     },
     {
-      title: "املاک ",
-      link: "",
+      title: "املاک خریداری شده",
+      link: "/provider/purchased",
       id: 2,
       icon: <InboxIcon sx={{ color: "white" }} />,
     },
@@ -64,7 +65,7 @@ const ListItemApp: React.FC<Partial<propstype>> = (props) => {
               borderRadius: "12px",
             }}
           >
-            <ListItemButton>
+            <ListItemButton onClick={() => router.push(v.link)}>
               <ListItemIcon>{v.icon}</ListItemIcon>
               <Typography
                 variant="h5"

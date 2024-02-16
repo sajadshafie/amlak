@@ -11,7 +11,7 @@ import BackTo from "@/libs/BackTo";
 type providerAppType = {
   username: string;
   children: React.ReactNode;
-  active: boolean;
+  active: number;
   confirmModal: boolean;
 };
 

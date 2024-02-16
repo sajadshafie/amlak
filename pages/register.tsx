@@ -17,18 +17,8 @@ const Register = (): JSX.Element => {
       text_is_register="ورود به حساب کاربری"
       stepNumber={activeStep}
       title={activeStep == 0 ? "ثبت نام حساب کاربری" : "ثبت کد تایید"}
-      sub_title={
-        activeStep == 0
-          ? "لطفا اطلاعات خواسته شده را تکمیل و بعد از ثبت آن منتطر ارسال کد پیامکی بمانید."
-          : "لطفا کد پیامک شده به شماره موبایل ۱۲۳۴۵۶۷۸۹ را وارد کنید."
-      }
-      step={global.step_auth_register}
     >
-      {activeStep == 0 ? (
-        <Registerform onSubmit={(form) => onSubmit(form, "register")} />
-      ) : (
-        <ConfirmCode onSubmit={(form) => onSubmit(form, "confirm")} />
-      )}
+      <Registerform onSubmit={(form) => onSubmit(form, "register")} />
     </AuthLayout>
   );
 };

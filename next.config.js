@@ -9,16 +9,18 @@ const nextConfig = {
   },
   swcMinify: false,
   images: {
-    unoptimized:true,
+    unoptimized: true,
     domains: ["cdn.talaremelk.ir"],
   },
   async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: "http://api2.talaremelk.ir/:path*",
-      },
-    ];
+    return {
+      fallback: [
+        {
+          source: "/:path*",
+          destination: "http://api2.talaremelk.ir/:path*",
+        },
+      ],
+    };
   },
 };
 
